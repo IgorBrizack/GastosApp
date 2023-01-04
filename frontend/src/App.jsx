@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import UserProvider from './contexts/UserContext';
 import './App.css';
 
 function App() {
