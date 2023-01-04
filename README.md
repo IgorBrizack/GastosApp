@@ -1,1 +1,1 @@
-# gatosApp
+# gastosApp
