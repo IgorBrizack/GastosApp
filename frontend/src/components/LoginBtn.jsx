@@ -13,7 +13,6 @@ function LoginBtn() {
       <button
         type="button"
         onClick={async () => navigate('/userscreen')}
-        data-testid="common_login__button-login"
       >
         Login
       </button>
