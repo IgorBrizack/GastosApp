@@ -9,10 +9,10 @@ ChartJS.register(...registerables);
 
 function MainUserScreen() {
   const [userData] = useState({
-    labels: Data.map((el) => el.year),
+    labels: Data.map((el) => el.type),
     datasets: [{
-      label: 'Users Gained',
-      data: Data.map((el) => el.userGain),
+      label: 'Waste',
+      data: Data.map((el) => el.wasted),
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
@@ -30,6 +30,13 @@ function MainUserScreen() {
         className="pie-chart-from-users"
       >
         <PieChart chartData={userData} />
+      </div>
+      <div>
+        <h2>Porcentagens</h2>
+        <p>comida x%</p>
+        <p>serviços x%</p>
+        <p>lazer x%</p>
+        <p>Investimento x%</p>
       </div>
     </>
   );

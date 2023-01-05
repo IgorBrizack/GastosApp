@@ -1,33 +1,28 @@
 const Data = [
   {
     id: 1,
-    year: 2016,
-    userGain: 100000,
-    userLost: 523,
+    type: 'Alimentação',
+    wasted: 100000,
   },
   {
     id: 2,
-    year: 2017,
-    userGain: 90000,
-    userLost: 623,
+    type: 'Serviços',
+    wasted: 90000,
   },
   {
     id: 3,
-    year: 2018,
-    userGain: 70000,
-    userLost: 723,
+    type: 'Investimentos',
+    wasted: 70000,
   },
   {
     id: 4,
-    year: 2022,
-    userGain: 70000,
-    userLost: 723,
+    type: 'Lazer',
+    wasted: 70000,
   },
   {
     id: 5,
-    year: 2023,
-    userGain: 50000,
-    userLost: 1723,
+    type: 'Educação',
+    wasted: 50000,
   },
 ];
 

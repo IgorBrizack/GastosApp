@@ -3,7 +3,6 @@ import EmailInput from '../components/EmailInput';
 import UserContext from '../contexts/UserContext';
 import GenericInput from '../components/GenericInput';
 import LoginBtn from '../components/LoginBtn';
-import Header from '../components/Header';
 
 function Login() {
   const {
@@ -11,7 +10,7 @@ function Login() {
   } = useContext(UserContext);
   return (
     <>
-      <Header />
+      <h1>Bem vindo(a) ao gastosApp</h1>
       <form>
         <EmailInput setEmail={setEmail} />
         <GenericInput
