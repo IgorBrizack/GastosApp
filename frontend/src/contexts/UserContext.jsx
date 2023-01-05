@@ -1,21 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import UserContext from './UserContext';
+import { createContext } from 'react';
 
-function UserProvider({ children }) {
-  const contextUser = useMemo(() => {
+const UserContext = createContext();
 
-  }, []);
-
-  return (
-    <UserContext.Provider value={contextUser}>
-      {children}
-    </UserContext.Provider>
-  );
-}
-
-export default UserProvider;
-
-UserProvider.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object),
-}.isRequired;
+export default UserContext;
