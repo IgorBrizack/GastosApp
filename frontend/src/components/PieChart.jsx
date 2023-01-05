@@ -1,21 +1,29 @@
 import React from 'react';
 import { Chart as ChartJS, registerables } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import PropTypes from 'prop-types';
 
 ChartJS.register(...registerables);
 
-function BarChart({ chartData }) {
+function PieChart({ chartData }) {
   return (
-    <Bar data={chartData} />
+    <div style={
+      {
+        padding: '20px',
+        // width: '50%',
+      }
+    }
+    >
+      <Pie data={chartData} />
+    </div>
   );
 }
 
-BarChart.propTypes = {
+PieChart.propTypes = {
   chartData: PropTypes.objectOf({
     labels: PropTypes.array,
     datasets: PropTypes.object,
   }).isRequired,
 };
 
-export default BarChart;
+export default PieChart;
