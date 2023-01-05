@@ -1,0 +1,12 @@
+version: '3'
+services:
+  docker_mysql:
+    image: mysql:5.7
+    container_name: sqlserver-tzdata
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_HOST: localhost
+      TZ: America/Fortaleza
+    ports:
+      - 3306:3306
