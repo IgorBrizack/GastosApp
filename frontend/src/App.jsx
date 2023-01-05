@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import UserProvider from './contexts/UserProvider';
-import './App.css';
 import Login from './pages/Login';
 import MainUserScreen from './pages/MainUserScreen';
 

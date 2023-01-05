@@ -2,3 +2,10 @@
   width: 300px;
   border-style: solid;
 }
+
+.header-main-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
