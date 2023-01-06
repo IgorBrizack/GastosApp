@@ -11,6 +11,7 @@
   "author": "Igor Brizack",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.0",
     "@types/node": "^18.11.18",
     "dotenv": "^16.0.3",
     "eslint": "^8.31.0",
