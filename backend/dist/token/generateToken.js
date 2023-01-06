@@ -8,11 +8,12 @@ require("dotenv/config");
 class GenerateToken {
     constructor() {
         this.generate = (userData) => {
+            const { email, role } = userData;
             const secret = process.env.JWT_SECRET || 'meusegredoguardado';
             const jwtConfig = {
                 algorithm: 'HS256'
             };
-            const token = jsonwebtoken_1.default.sign({ data: userData }, secret, jwtConfig);
+            const token = jsonwebtoken_1.default.sign({ data: { email, role } }, secret, jwtConfig);
             return token;
         };
     }

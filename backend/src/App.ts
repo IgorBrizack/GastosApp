@@ -13,7 +13,7 @@ const options: cors.CorsOptions = {
 
 app.use(cors(options));
 
-
 app.use('/login', userRouter)
 app.use(error)
+
 export default app;

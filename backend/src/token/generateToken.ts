@@ -1,4 +1,3 @@
-import { tokenInterface } from '../interfaces/tokenInterface'
 import jwt from 'jsonwebtoken'
 import 'dotenv/config';
 
