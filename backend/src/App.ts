@@ -7,13 +7,10 @@ const app = express();
 
 app.use(express.json());
 
-const options: cors.CorsOptions = {
-  origin: process.env.WEB_HOST
-};
 
-app.use(cors(options));
+app.use(cors());
 
-app.use('/login', userRouter)
+app.use(userRouter)
 app.use(error)
 
 export default app;

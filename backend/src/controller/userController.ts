@@ -10,7 +10,7 @@ export default class UserController {
   public login = async (req: Request, res: Response) => {
     const { email, password }= req.body;
     const userData = await this.userService.loginService(email, password)
-    res.status(201).json({token: userData})
+    res.status(201).json(userData)
   }
 
   public register = async (req: Request, res: Response) => {
