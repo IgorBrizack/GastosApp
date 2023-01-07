@@ -7,8 +7,8 @@ module.exports = {
           username: 'Igor Brizack',
           email: 'igorbrizack@mail.com',
           role: 'user',
-          password:'password'
-          //SENHA: matheustectrybe
+          password:'$2a$10$Jcay1UqjS7DI3roayiK0ZuOUiGcnTpquBKanXPtVg9uop17vLJUNK'
+          //SENHA: resolvaminhaquery
         },
       ],
       {},

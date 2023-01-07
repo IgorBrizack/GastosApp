@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import UserContext from '../contexts/UserContext';
+import UserContext from '../contexts/UserContext';
+import { postData } from '../services/request';
 
 function LoginBtn() {
-  // const { email, password, valid } = useContext(UserContext);
-  // const [user, setUser] = useState(false);
-
   const navigate = useNavigate();
+
+  const {
+    email, password, setUser,
+  } = useContext(UserContext);
+
+  async function login(body) {
+    try {
+      const result = await postData('/login', body);
+      localStorage.setItem('user', JSON.stringify(result));
+      if (result.role === 'user') navigate('/user');
+    } catch (error) {
+      setUser(true);
+    }
+  }
 
   return (
     <div>
       <button
         type="button"
-        onClick={async () => navigate('/userscreen')}
+        onClick={() => login({ email, password })}
       >
         Login
       </button>

@@ -28,10 +28,6 @@ exports.User = _1.default.define('User', {
     role: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-    },
-    specialty: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: true,
     }
 }, {
     timestamps: false,

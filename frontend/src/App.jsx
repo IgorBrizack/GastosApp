@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route exact path="/" element={<Navigate to="/login" />} />
-        <Route path="/userscreen" element={<MainUserScreen />} />
+        <Route path="/user" element={<MainUserScreen />} />
       </Routes>
     </UserProvider>
   );
