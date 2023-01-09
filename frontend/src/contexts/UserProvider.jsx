@@ -14,7 +14,7 @@ function UserProvider({ children }) {
     setPassword,
     hasUser,
     setHasUser,
-  }), [email, password]);
+  }), [email, password, hasUser]);
 
   return (
     <UserContext.Provider value={contextUser}>
