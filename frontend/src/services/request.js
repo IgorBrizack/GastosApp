@@ -4,7 +4,7 @@ const verifyLocalStorage = () => {
   if (!localStorage.getItem('user')) {
     localStorage.setItem(
       'user',
-      JSON.stringify({ name: '', token: '' }),
+      JSON.stringify({ username: '', token: '' }),
     );
   }
   const { token } = JSON.parse(localStorage.getItem('user'));

@@ -6,6 +6,9 @@ function UserProvider({ children }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [hasUser, setHasUser] = useState(false);
+  const [registerEmail, setRegisterEmail] = useState();
+  const [registerPassword, setRegisterPassword] = useState();
+  const [registerUserName, setRegisterUserName] = useState();
 
   const contextUser = useMemo(() => ({
     email,
@@ -14,7 +17,20 @@ function UserProvider({ children }) {
     setPassword,
     hasUser,
     setHasUser,
-  }), [email, password, hasUser]);
+    registerEmail,
+    setRegisterEmail,
+    registerPassword,
+    setRegisterPassword,
+    registerUserName,
+    setRegisterUserName,
+  }), [
+    email,
+    password,
+    hasUser,
+    registerEmail,
+    registerPassword,
+    registerUserName,
+  ]);
 
   return (
     <UserContext.Provider value={contextUser}>

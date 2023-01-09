@@ -40,6 +40,13 @@ function Login() {
         <LoginBtn />
       </form>
       { hasUser && <p> usuário inválido ou senha inválido</p> }
+      <button
+        type="button"
+        onClick={() => navigate('/register')}
+      >
+        Resgistrar
+
+      </button>
     </>
   );
 }
