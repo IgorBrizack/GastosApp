@@ -5,15 +5,15 @@ import UserContext from './UserContext';
 function UserProvider({ children }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [user, setUser] = useState(false);
+  const [hasUser, setHasUser] = useState(false);
 
   const contextUser = useMemo(() => ({
     email,
     setEmail,
     password,
     setPassword,
-    user,
-    setUser,
+    hasUser,
+    setHasUser,
   }), [email, password]);
 
   return (

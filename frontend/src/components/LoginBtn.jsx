@@ -7,7 +7,7 @@ function LoginBtn() {
   const navigate = useNavigate();
 
   const {
-    email, password, setUser,
+    email, password, setHasUser,
   } = useContext(UserContext);
 
   async function login(body) {
@@ -16,7 +16,7 @@ function LoginBtn() {
       localStorage.setItem('user', JSON.stringify(result));
       if (result.role === 'user') navigate('/user');
     } catch (error) {
-      setUser(true);
+      setHasUser(true);
     }
   }
 
