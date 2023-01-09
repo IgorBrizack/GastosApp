@@ -7,5 +7,6 @@ const userRouter = Router();
 const userController = new UserController();
 
 userRouter.post('/login', loginValidation, userController.login)
+userRouter.post('/register', loginValidation, userController.register)
 
 export default userRouter
