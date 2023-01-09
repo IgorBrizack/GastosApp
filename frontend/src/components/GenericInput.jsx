@@ -8,7 +8,6 @@ function GenericInput({
     <label htmlFor={selector}>
       { fieldName}
       <input
-        data-testid="common_login__input-password"
         type={type}
         id={selector}
         className={selector}

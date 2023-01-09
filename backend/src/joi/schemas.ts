@@ -14,5 +14,21 @@ export const loginSchema = Joi.object({
   }),
 });
 
+export const registerSchema = Joi.object({
+  email: Joi.string().required().email().messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+  password: Joi.string().required().min(8).messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+  username: Joi.string().required().min(12).messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+  role: Joi.string().required(),
+});
+
 
 

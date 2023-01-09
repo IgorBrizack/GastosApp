@@ -7,7 +7,7 @@ import LoginBtn from '../components/LoginBtn';
 
 function Login() {
   const {
-    setEmail, setPassword, user,
+    setEmail, setPassword, hasUser,
   } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -39,7 +39,14 @@ function Login() {
         />
         <LoginBtn />
       </form>
-      { user && <p> usuário inválido ou senha inválido</p> }
+      { hasUser && <p> usuário inválido ou senha inválido</p> }
+      <button
+        type="button"
+        onClick={() => navigate('/register')}
+      >
+        Resgistrar
+
+      </button>
     </>
   );
 }

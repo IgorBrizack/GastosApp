@@ -27,7 +27,7 @@ export default class UserService {
     const hasUser = await this.getByEmail(email);
 
     if (!hasUser) {
-      await User.create({ username, email,passwordCryptography, role });
+      return await User.create({ username, email, password: passwordCryptography, role });
     }
 
     throw new ErrorWithStatus('User already registered!', 409)
