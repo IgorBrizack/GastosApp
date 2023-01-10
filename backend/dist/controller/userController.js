@@ -44,7 +44,7 @@ class UserController {
         this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { email, password } = req.body;
             const userData = yield this.userService.loginService(email, password);
-            res.status(201).json({ token: userData });
+            res.status(201).json(userData);
         });
         this.register = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { username, email, password, role } = req.body;

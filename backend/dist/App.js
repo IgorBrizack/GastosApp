@@ -10,10 +10,7 @@ const error_1 = __importDefault(require("./middleware/error"));
 const userRoute_1 = __importDefault(require("./routes/userRoute"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-const options = {
-    origin: process.env.WEB_HOST
-};
-app.use((0, cors_1.default)(options));
-app.use('/login', userRoute_1.default);
+app.use((0, cors_1.default)());
+app.use(userRoute_1.default);
 app.use(error_1.default);
 exports.default = app;
