@@ -8,18 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const User_1 = require("../database/models/User");
-const Gasto_1 = require("../database/models/Gasto");
-class GastosService {
-    constructor() {
-        this.insertGasto = (data) => __awaiter(this, void 0, void 0, function* () {
-            const { email, type, value } = data;
-            const userData = yield User_1.User.findOne({ where: { email } });
-            const id = { userData };
-            const gasto = Gasto_1.Gasto.create({ userId: id, type, value });
-            console.log(gasto);
+const gastosService_1 = __importDefault(require("../service/gastosService"));
+class GastoController {
+    constructor(gastoService = new gastosService_1.default()) {
+        this.gastoService = gastoService;
+        this.insert = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { email, type, value } = req.body;
+            yield this.gastoService.insertGasto({ email, type, value });
+            res.status(201).json({ message: 'inserido' });
         });
     }
 }
-exports.default = GastosService;
+exports.default = GastoController;

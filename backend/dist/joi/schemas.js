@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerSchema = exports.loginSchema = void 0;
+exports.gastoSchema = exports.registerSchema = exports.loginSchema = void 0;
 const Joi = require('joi');
 const StringEmpty = 'Some required fields are missing';
 const InvalidFields = 'Invalid fields';
@@ -28,4 +28,18 @@ exports.registerSchema = Joi.object({
         'any.required': InvalidFields,
     }),
     role: Joi.string().required(),
+});
+exports.gastoSchema = Joi.object({
+    email: Joi.string().required().email().messages({
+        'string.empty': StringEmpty,
+        'any.required': InvalidFields,
+    }),
+    value: Joi.number().required().messages({
+        'string.empty': StringEmpty,
+        'any.required': InvalidFields,
+    }),
+    type: Joi.string().required().messages({
+        'string.empty': StringEmpty,
+        'any.required': InvalidFields,
+    }),
 });

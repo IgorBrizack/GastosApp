@@ -30,5 +30,20 @@ export const registerSchema = Joi.object({
   role: Joi.string().required(),
 });
 
+export const gastoSchema = Joi.object({
+  email: Joi.string().required().email().messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+  value: Joi.number().required().messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+  type: Joi.string().required().messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+});
+
 
 

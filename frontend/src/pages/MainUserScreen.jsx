@@ -8,6 +8,7 @@ import Header from '../components/Header';
 ChartJS.register(...registerables);
 
 function MainUserScreen() {
+  const [selectedType, setSelectedType] = useState('alimentacao');
   const [userData] = useState({
     labels: Data.map((el) => el.type),
     datasets: [{
@@ -23,21 +24,44 @@ function MainUserScreen() {
       hoverOffset: 4,
     }],
   });
+
   return (
     <>
       <Header />
+      <p>{selectedType}</p>
       <div
         className="pie-chart-from-users"
       >
         <PieChart chartData={userData} />
       </div>
-      <div>
+      <h2>Inserir novo gasto</h2>
+      <label htmlFor="dinheiro">
+        R$
+        <input id="dinheiro" type="number" step="0.01" name="quantity" min="0.01" />
+      </label>
+      <label htmlFor="dinheiro">
+        Tipo:
+        <select onChange={(e) => setSelectedType(e.target.value)} name="select">
+          <option value="alimentacao" selected>Alimentação</option>
+          <option value="servico">Serviços</option>
+          <option value="investimento">Investimentos</option>
+          <option value="lazer">Lazer</option>
+          <option value="educacao">Educação</option>
+        </select>
+      </label>
+      <button
+        type="button"
+      >
+        Inserir
+
+      </button>
+      {/* <div>
         <h2>Porcentagens</h2>
         <p>comida x%</p>
         <p>serviços x%</p>
         <p>lazer x%</p>
         <p>Investimento x%</p>
-      </div>
+      </div> */}
     </>
   );
 }
