@@ -4,6 +4,7 @@ import PieChart from '../components/PieChart';
 import '../style.css';
 import Header from '../components/Header';
 import { getData, postData } from '../services/request';
+import PorcentagensComponent from '../components/Porcentagens';
 
 ChartJS.register(...registerables);
 
@@ -13,8 +14,41 @@ function MainUserScreen() {
   const [valueGasto, setValueGasto] = useState('0');
   const [allData, setAllData] = useState();
   const [render, setRender] = useState(true);
+  const [hasPercentages, setHasPercentages] = useState(false);
+  const [eduPercentage, setEduPercentage] = useState();
+  const [lazerPercentage, setLazerPercentage] = useState();
+  const [investPercentage, setInvestPercentage] = useState();
+  const [alimentacaoPercentage, setAlimentacaoPercentage] = useState();
+  const [servicoPercentage, setServicoPercentage] = useState();
+
+  const getPercentages = (data) => {
+    const total = data.reduce((acc, el) => {
+      const sum = acc + el.value;
+      return sum;
+    }, 0);
+
+    const [lazerValue] = data.filter((el) => el.type === 'lazer');
+    const [educacaoValue] = data.filter((el) => el.type === 'educacao');
+    const [investimentoValue] = data.filter((el) => el.type === 'investimento');
+    const [servicoValue] = data.filter((el) => el.type === 'servico');
+    const [alimentacaoValue] = data.filter((el) => el.type === 'alimentacao');
+
+    const lazerPercentual = ((Number(lazerValue.value) * 100) / total);
+    const educacaoPercentual = ((Number(educacaoValue.value) * 100) / total);
+    const investimentoPercentual = ((Number(investimentoValue.value) * 100) / total);
+    const servicoPercentual = ((Number(servicoValue.value) * 100) / total);
+    const alimentacaoPercentual = ((Number(alimentacaoValue.value) * 100) / total);
+
+    setEduPercentage(educacaoPercentual);
+    setLazerPercentage(lazerPercentual);
+    setInvestPercentage(investimentoPercentual);
+    setAlimentacaoPercentage(alimentacaoPercentual);
+    setServicoPercentage(servicoPercentual);
+    setHasPercentages(true);
+  };
 
   const formatedData = (data) => {
+    getPercentages(data);
     const labels = {
       alimentacao: 'Alimentação',
       servico: 'Serviço',
@@ -25,16 +59,6 @@ function MainUserScreen() {
 
     const formated = data.reduce((acc, el, index) => {
       const { type, value } = el;
-      if (acc.some((element) => element.type === labels[el.type])) {
-        const accFiltered = acc.filter((element) => element.type !== labels[el.type]);
-        const [accFilteredOld] = acc.filter((element) => element.type === labels[el.type]);
-        const newElement = {
-          type: labels[type],
-          value: Number(accFilteredOld.value) + Number(value),
-          id: accFilteredOld.id,
-        };
-        return [...accFiltered, newElement];
-      }
       acc.push({ type: labels[type], value, id: index + 1 });
       return acc;
     }, []);
@@ -43,7 +67,7 @@ function MainUserScreen() {
       labels: formated.map((el) => el.type),
       datasets: [{
         label: 'All data',
-        data: formated.map((el) => el.value),
+        data: formated.map((el) => Number(el.value)),
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',
@@ -79,6 +103,7 @@ function MainUserScreen() {
   };
 
   useEffect(() => {
+    setHasPercentages(false);
     getAllData();
   }, [render]);
 
@@ -91,6 +116,16 @@ function MainUserScreen() {
         {allData && (<PieChart chartData={allData} />)}
 
       </div>
+      {hasPercentages && (
+      <PorcentagensComponent
+        lazer={lazerPercentage}
+        servico={servicoPercentage}
+        educacao={eduPercentage}
+        investimento={investPercentage}
+        alimentacao={alimentacaoPercentage}
+      />
+      )}
+
       <h2>Inserir novo gasto</h2>
       <label htmlFor="dinheiro">
         R$
@@ -130,7 +165,6 @@ function MainUserScreen() {
         onClick={() => insertGasto()}
       >
         Inserir
-
       </button>
     </>
   );
