@@ -8,5 +8,5 @@ const gastoRouter = Router();
 const gastoController = new GastoController();
 
 gastoRouter.post('/gasto',validateJWT, gastoValidation, gastoController.insert)
-
+gastoRouter.get('/gasto/:email', validateJWT, gastoController.getGastosUser)
 export default gastoRouter
