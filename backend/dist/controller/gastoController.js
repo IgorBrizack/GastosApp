@@ -17,8 +17,8 @@ class GastoController {
     constructor(gastoService = new gastosService_1.default()) {
         this.gastoService = gastoService;
         this.insert = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { email, type, value } = req.body;
-            yield this.gastoService.insertGasto({ email, type, value });
+            const { email, type, value, date } = req.body;
+            yield this.gastoService.insertGasto({ email, type, value, date });
             res.status(201).json({ message: 'inserido' });
         });
     }

@@ -20,6 +20,10 @@ export const Gasto = db.define('Gasto', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  gastoDate: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
 }, {
   timestamps: false,
   tableName: 'gastos',

@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.gastoSchema = exports.registerSchema = exports.loginSchema = void 0;
-const Joi = require('joi');
+const Joi = require('joi')
+    .extend(require('@joi/date'));
 const StringEmpty = 'Some required fields are missing';
 const InvalidFields = 'Invalid fields';
 exports.loginSchema = Joi.object({
@@ -42,4 +43,5 @@ exports.gastoSchema = Joi.object({
         'string.empty': StringEmpty,
         'any.required': InvalidFields,
     }),
+    date: Joi.date().utc().format(['YYYY/MM/DD', 'DD/MM/YYYY']),
 });

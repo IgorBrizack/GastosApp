@@ -5,10 +5,10 @@ import { Gasto } from "../database/models/Gasto";
 export default class GastosService {
 
   public insertGasto = async (data: gastoInterface) => {
-    const { email, type, value  } = data
+    const { email, type, value, date  } = data
     const userData: any = await User.findOne({ where: { email } })
     const id = { userData };
 
-    Gasto.create({userId: Number(id), type, value})
+    Gasto.create({userId: Number(id), type, value, gastoDate: date})
   }
 }

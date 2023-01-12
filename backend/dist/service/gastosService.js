@@ -14,11 +14,10 @@ const Gasto_1 = require("../database/models/Gasto");
 class GastosService {
     constructor() {
         this.insertGasto = (data) => __awaiter(this, void 0, void 0, function* () {
-            const { email, type, value } = data;
+            const { email, type, value, date } = data;
             const userData = yield User_1.User.findOne({ where: { email } });
             const id = { userData };
-            const gasto = Gasto_1.Gasto.create({ userId: id, type, value });
-            console.log(gasto);
+            Gasto_1.Gasto.create({ userId: Number(id), type, value, date });
         });
     }
 }

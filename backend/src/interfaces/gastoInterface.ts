@@ -9,5 +9,6 @@ enum gastosType {
 export default interface gastoInterface {
   email: string,
   value: number,
-  type: gastosType
+  type: gastosType,
+  date: Date
 }

@@ -21,6 +21,10 @@ module.exports = {
       value: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      gasto_date: {
+        type: Sequelize.STRING,
+        allowNull: false
       }
     });
   },

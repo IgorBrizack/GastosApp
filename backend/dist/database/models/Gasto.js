@@ -25,6 +25,10 @@ exports.Gasto = _1.default.define('Gasto', {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
     },
+    gastoDate: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    }
 }, {
     timestamps: false,
     tableName: 'gastos',
