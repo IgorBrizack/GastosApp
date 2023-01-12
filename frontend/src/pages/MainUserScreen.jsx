@@ -4,11 +4,15 @@ import PieChart from '../components/PieChart';
 import Data from '../Data';
 import '../style.css';
 import Header from '../components/Header';
+import { postData } from '../services/request';
 
 ChartJS.register(...registerables);
 
 function MainUserScreen() {
   const [selectedType, setSelectedType] = useState('alimentacao');
+  const [date, setDate] = useState('0000-00-00');
+  const [valueGasto, setValueGasto] = useState('0');
+
   const [userData] = useState({
     labels: Data.map((el) => el.type),
     datasets: [{
@@ -25,10 +29,20 @@ function MainUserScreen() {
     }],
   });
 
+  const insertGasto = async () => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    try {
+      return await postData('/gasto', {
+        email, value: Number(valueGasto), type: selectedType, date: date.replaceAll('-', '/'),
+      });
+    } catch (error) {
+      return error.message;
+    }
+  };
+
   return (
     <>
       <Header />
-      <p>{selectedType}</p>
       <div
         className="pie-chart-from-users"
       >
@@ -37,7 +51,14 @@ function MainUserScreen() {
       <h2>Inserir novo gasto</h2>
       <label htmlFor="dinheiro">
         R$
-        <input id="dinheiro" type="number" step="0.01" name="quantity" min="0.01" />
+        <input
+          onChange={(e) => setValueGasto(e.target.value)}
+          id="dinheiro"
+          type="number"
+          step="0.01"
+          name="quantity"
+          min="0.01"
+        />
       </label>
       <label htmlFor="dinheiro">
         Tipo:
@@ -49,8 +70,21 @@ function MainUserScreen() {
           <option value="educacao">Educação</option>
         </select>
       </label>
+      <label htmlFor="insert-date-input">
+        Data:
+        <input
+          onChange={(e) => setDate(e.target.value)}
+          value={date}
+          type="date"
+          id="insert-date-input"
+          name="gasto-date"
+          min="2000-01-01"
+          max="2030-01-01"
+        />
+      </label>
       <button
         type="button"
+        onClick={() => insertGasto()}
       >
         Inserir
 
