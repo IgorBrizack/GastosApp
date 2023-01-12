@@ -1,44 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import PieChart from '../components/PieChart';
-import Data from '../Data';
 import '../style.css';
 import Header from '../components/Header';
-import { postData } from '../services/request';
+import { getData, postData } from '../services/request';
 
 ChartJS.register(...registerables);
 
 function MainUserScreen() {
   const [selectedType, setSelectedType] = useState('alimentacao');
-  const [date, setDate] = useState('0000-00-00');
+  const [date, setDate] = useState();
   const [valueGasto, setValueGasto] = useState('0');
+  const [allData, setAllData] = useState();
+  const [render, setRender] = useState(true);
 
-  const [userData] = useState({
-    labels: Data.map((el) => el.type),
-    datasets: [{
-      label: 'Waste',
-      data: Data.map((el) => el.wasted),
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
-        'rgb(70, 158, 94)',
-        'rgb(114, 70, 158)',
-      ],
-      hoverOffset: 4,
-    }],
-  });
+  const formatedData = (data) => {
+    const labels = {
+      alimentacao: 'Alimentação',
+      servico: 'Serviço',
+      investimento: 'Investimento',
+      lazer: 'Lazer',
+      educacao: 'Educação',
+    };
 
-  const insertGasto = async () => {
+    const formated = data.reduce((acc, el, index) => {
+      const { type, value } = el;
+      if (acc.some((element) => element.type === labels[el.type])) {
+        const accFiltered = acc.filter((element) => element.type !== labels[el.type]);
+        const [accFilteredOld] = acc.filter((element) => element.type === labels[el.type]);
+        const newElement = {
+          type: labels[type],
+          value: Number(accFilteredOld.value) + Number(value),
+          id: accFilteredOld.id,
+        };
+        return [...accFiltered, newElement];
+      }
+      acc.push({ type: labels[type], value, id: index + 1 });
+      return acc;
+    }, []);
+
+    return setAllData({
+      labels: formated.map((el) => el.type),
+      datasets: [{
+        label: 'All data',
+        data: formated.map((el) => el.value),
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          'rgb(70, 158, 94)',
+          'rgb(114, 70, 158)',
+        ],
+        hoverOffset: 4,
+      }],
+    });
+  };
+
+  const getAllData = async () => {
     const { email } = JSON.parse(localStorage.getItem('user'));
     try {
-      return await postData('/gasto', {
-        email, value: Number(valueGasto), type: selectedType, date: date.replaceAll('-', '/'),
-      });
+      const data = await getData(`/gasto/${email}`);
+      return formatedData(data);
     } catch (error) {
       return error.message;
     }
   };
+
+  const insertGasto = async () => {
+    const { email } = JSON.parse(localStorage.getItem('user'));
+    try {
+      await postData('/gasto', {
+        email, value: Number(valueGasto), type: selectedType, date: date.replaceAll('-', '/'),
+      });
+      return setRender(!render);
+    } catch (error) {
+      return error.message;
+    }
+  };
+
+  useEffect(() => {
+    getAllData();
+  }, [render]);
 
   return (
     <>
@@ -46,7 +88,8 @@ function MainUserScreen() {
       <div
         className="pie-chart-from-users"
       >
-        <PieChart chartData={userData} />
+        {allData && (<PieChart chartData={allData} />)}
+
       </div>
       <h2>Inserir novo gasto</h2>
       <label htmlFor="dinheiro">
@@ -63,7 +106,7 @@ function MainUserScreen() {
       <label htmlFor="dinheiro">
         Tipo:
         <select onChange={(e) => setSelectedType(e.target.value)} name="select">
-          <option value="alimentacao" selected>Alimentação</option>
+          <option value="alimentacao">Alimentação</option>
           <option value="servico">Serviços</option>
           <option value="investimento">Investimentos</option>
           <option value="lazer">Lazer</option>
@@ -89,13 +132,6 @@ function MainUserScreen() {
         Inserir
 
       </button>
-      {/* <div>
-        <h2>Porcentagens</h2>
-        <p>comida x%</p>
-        <p>serviços x%</p>
-        <p>lazer x%</p>
-        <p>Investimento x%</p>
-      </div> */}
     </>
   );
 }
