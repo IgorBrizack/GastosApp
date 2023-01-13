@@ -5,19 +5,23 @@ import Sequelize from "../database/models/index"
 
 export default class GastosService {
 
+  public getUserId = async (email: string): Promise<Number> => {
+    const userData: any = await User.findOne({ where: { email } })
+    const { id } = userData
+    return id
+  }
+
   public insertGasto = async (data: gastoInterface) => {
     const { email, type, value, date  } = data
-    const userData: any = await User.findOne({ where: { email } })
-    const { id } = userData ;
+    const id = await this.getUserId(email)
 
     await Gasto.create({userId: Number(id), type, value, gastoDate: date})
   }
 
   public getAllGastosFromUser = async (email: string) => {
-    const userData: any = await User.findOne({ where: { email } })
-    const { id } = userData ;
+    const id = await this.getUserId(email)
 
-    const QUERY = `SELECT user_id,type, SUM(value) as value FROM gastos_app_db.gastos
+    const QUERY = `SELECT user_id, type, SUM(value) as value FROM gastos_app_db.gastos
     WHERE (user_id = ${id}) 
     AND (type = 'alimentacao' OR type = 'servico' OR type = 'investimento' OR type = 'lazer' OR type = 'educacao')
     GROUP BY user_id, type`;

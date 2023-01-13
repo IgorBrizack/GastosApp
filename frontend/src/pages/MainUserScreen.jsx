@@ -12,7 +12,7 @@ function MainUserScreen() {
   const [selectedType, setSelectedType] = useState('alimentacao');
   const [date, setDate] = useState();
   const [valueGasto, setValueGasto] = useState('0');
-  const [allData, setAllData] = useState();
+  const [allChartData, setChartData] = useState();
   const [render, setRender] = useState(true);
   const [hasPercentages, setHasPercentages] = useState(false);
   const [eduPercentage, setEduPercentage] = useState();
@@ -63,7 +63,7 @@ function MainUserScreen() {
       return acc;
     }, []);
 
-    return setAllData({
+    return setChartData({
       labels: formated.map((el) => el.type),
       datasets: [{
         label: 'All data',
@@ -113,7 +113,7 @@ function MainUserScreen() {
       <div
         className="pie-chart-from-users"
       >
-        {allData && (<PieChart chartData={allData} />)}
+        {allChartData && (<PieChart chartData={allChartData} />)}
 
       </div>
       {hasPercentages && (

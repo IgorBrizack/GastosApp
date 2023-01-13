@@ -8,19 +8,19 @@ function PorcentagensComponent({
     <div>
       <h2>Porcentagens</h2>
       <p>
-        {`Lazer ${lazer}%`}
+        {`Lazer ${lazer ? Number(lazer).toFixed(2) : 0}%`}
       </p>
       <p>
-        {`Educação ${educacao}%`}
+        {`Educação ${educacao ? Number(educacao).toFixed(2) : 0}%`}
       </p>
       <p>
-        {`Investimento ${investimento}%`}
+        {`Investimento ${investimento ? Number(investimento).toFixed(2) : 0}%`}
       </p>
       <p>
-        {`Alimentação ${alimentacao}%`}
+        {`Alimentação ${alimentacao ? Number(alimentacao).toFixed(2) : 0}%`}
       </p>
       <p>
-        {`Serviço ${servico}%`}
+        {`Serviço ${servico ? Number(servico).toFixed(2) : 0}%`}
       </p>
     </div>
   );

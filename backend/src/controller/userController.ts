@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
 import UserService from "../service/userService";
-
 import * as bcrypt from 'bcryptjs';
+import GastosService from "../service/gastosService";
+import { gastosDefault } from "../helpers/gastosDefault";
+import gastoInterface from "../interfaces/gastoInterface";
 const saltRounds = 10;
 
 export default class UserController {
-  constructor(private userService = new UserService()) {}
+  constructor(
+  private userService = new UserService(),
+  private gastosService = new GastosService) {}
 
   public login = async (req: Request, res: Response) => {
     const { email, password }= req.body;
@@ -19,6 +23,12 @@ export default class UserController {
     const passwordCryptography = await bcrypt.hash(password, saltRounds);
 
     await this.userService.registerService({username, email, passwordCryptography, role});
+
+    const defaultValues: gastoInterface[] = gastosDefault(email)
+
+    const teste = defaultValues.map((el) => this.gastosService.insertGasto(el))
+
+    await Promise.all(teste)
 
     return res.status(201).json({message: "Created"})
   }

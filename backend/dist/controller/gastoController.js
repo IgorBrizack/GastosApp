@@ -21,6 +21,16 @@ class GastoController {
             yield this.gastoService.insertGasto({ email, type, value, date });
             res.status(201).json({ message: 'inserido' });
         });
+        this.getGastosUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { email } = req.params;
+            try {
+                const gastos = yield this.gastoService.getAllGastosFromUser(email);
+                return res.status(200).json(gastos);
+            }
+            catch (error) {
+                return res.status(400).json({ message: 'Not found' });
+            }
+        });
     }
 }
 exports.default = GastoController;

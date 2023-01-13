@@ -8,16 +8,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const User_1 = require("../database/models/User");
 const Gasto_1 = require("../database/models/Gasto");
+const index_1 = __importDefault(require("../database/models/index"));
 class GastosService {
     constructor() {
+        this.getUserId = (email) => __awaiter(this, void 0, void 0, function* () {
+            const userData = yield User_1.User.findOne({ where: { email } });
+            const { id } = userData;
+            return id;
+        });
         this.insertGasto = (data) => __awaiter(this, void 0, void 0, function* () {
             const { email, type, value, date } = data;
-            const userData = yield User_1.User.findOne({ where: { email } });
-            const id = { userData };
-            Gasto_1.Gasto.create({ userId: Number(id), type, value, date });
+            const id = yield this.getUserId(email);
+            yield Gasto_1.Gasto.create({ userId: Number(id), type, value, gastoDate: date });
+        });
+        this.getAllGastosFromUser = (email) => __awaiter(this, void 0, void 0, function* () {
+            const id = yield this.getUserId(email);
+            const QUERY = `SELECT user_id, type, SUM(value) as value FROM gastos_app_db.gastos
+    WHERE (user_id = ${id}) 
+    AND (type = 'alimentacao' OR type = 'servico' OR type = 'investimento' OR type = 'lazer' OR type = 'educacao')
+    GROUP BY user_id, type`;
+            const [result] = yield index_1.default.query(QUERY);
+            return result;
         });
     }
 }

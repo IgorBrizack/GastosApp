@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.gastosType = void 0;
 var gastosType;
 (function (gastosType) {
-    gastosType[gastosType["alimentacao"] = 0] = "alimentacao";
-    gastosType[gastosType["servico"] = 1] = "servico";
-    gastosType[gastosType["investimento"] = 2] = "investimento";
-    gastosType[gastosType["lazer"] = 3] = "lazer";
-    gastosType[gastosType["educacao"] = 4] = "educacao";
-})(gastosType || (gastosType = {}));
+    gastosType["alimentacao"] = "alimentacao";
+    gastosType["servico"] = "servico";
+    gastosType["investimento"] = "investimento";
+    gastosType["lazer"] = "lazer";
+    gastosType["educacao"] = "educacao";
+})(gastosType = exports.gastosType || (exports.gastosType = {}));
