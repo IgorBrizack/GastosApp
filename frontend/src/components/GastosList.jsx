@@ -32,11 +32,15 @@ function GastosList() {
               <th>Tipo</th>
               <th>Data</th>
               <th>Editar</th>
+              <th>Salvar</th>
+              <th>Deletar</th>
             </tr>
           </thead>
           <tbody>
             {gastoList.length > 0 && (
-              gastoList.map((el) => <TrComponent element={el} />))}
+              gastoList.map((el) => (
+                <TrComponent element={el} key={el.id} />
+              )))}
           </tbody>
         </table>
       </nav>

@@ -7,27 +7,27 @@ module.exports = {
           user_id: 1,
           type: 'lazer',
           value: 100,
-          gasto_date: '0000/00/00'
+          gasto_date: '00/00/0000'
         },{
           user_id: 1,
           type: 'educacao',
           value: 100,
-          gasto_date: '0000/00/00'
+          gasto_date: '00/00/0000'
         },{
           user_id: 1,
           type: 'investimento',
           value: 100,
-          gasto_date: '0000/00/00'
+          gasto_date: '00/00/0000'
         },{
           user_id: 1,
           type: 'servico',
           value: 100,
-          gasto_date: '0000/00/00'
+          gasto_date: '00/00/0000'
         },{
           user_id: 1,
           type: 'alimentacao',
           value: 100,
-          gasto_date: '0000/00/00'
+          gasto_date: '00/00/0000'
         }
       ],
       {},

@@ -16,15 +16,16 @@ tbody {
     height: 200px;       /* Just for the demo          */
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
+    width: 500px;
 }
 
 
 tr th label input {
-  width: 50px;
+  width: 100px;
   height: 30px;
 }
 
 tr th label p {
-  width: 50px;
+  width: 100px;
   
 }

@@ -95,7 +95,7 @@ function MainUserScreen() {
     const { email } = JSON.parse(localStorage.getItem('user'));
     try {
       await postData('/gasto', {
-        email, value: Number(valueGasto), type: selectedType, date: date.replaceAll('-', '/'),
+        email, value: Number(valueGasto), type: selectedType, date,
       });
       return setRender(!render);
     } catch (error) {
@@ -142,7 +142,7 @@ function MainUserScreen() {
       <label htmlFor="insert-date-input">
         Data:
         <input
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(e) => setDate(e.target.value.split('-').reverse().join('/'))}
           value={date}
           type="date"
           id="insert-date-input"
