@@ -26,9 +26,9 @@ export default class UserController {
 
     const defaultValues: gastoInterface[] = gastosDefault(email)
 
-    const teste = defaultValues.map((el) => this.gastosService.insertGasto(el))
+    const values = defaultValues.map((el) => this.gastosService.insertGasto(el))
 
-    await Promise.all(teste)
+    await Promise.all(values)
 
     return res.status(201).json({message: "Created"})
   }

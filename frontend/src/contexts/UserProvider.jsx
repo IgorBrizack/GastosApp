@@ -9,6 +9,7 @@ function UserProvider({ children }) {
   const [registerEmail, setRegisterEmail] = useState();
   const [registerPassword, setRegisterPassword] = useState();
   const [registerUserName, setRegisterUserName] = useState();
+  const [gastoList, setGastoList] = useState([]);
 
   const contextUser = useMemo(() => ({
     email,
@@ -23,6 +24,8 @@ function UserProvider({ children }) {
     setRegisterPassword,
     registerUserName,
     setRegisterUserName,
+    gastoList,
+    setGastoList,
   }), [
     email,
     password,
@@ -30,6 +33,7 @@ function UserProvider({ children }) {
     registerEmail,
     registerPassword,
     registerUserName,
+    gastoList,
   ]);
 
   return (

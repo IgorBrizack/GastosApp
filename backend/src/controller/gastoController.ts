@@ -19,4 +19,14 @@ export default class GastoController {
       return res.status(400).json({message: 'Not found'})
     }
   }
+
+  public getGastosUserList = async (req: Request, res:Response) => {
+    const { email } = req.params
+    try {
+      const gastos = await this.gastoService.getGastoListFromUser(email)
+      return res.status(200).json(gastos)
+    } catch (error) {
+      return res.status(400).json({message: 'Not found'})
+    }
+  }
 }

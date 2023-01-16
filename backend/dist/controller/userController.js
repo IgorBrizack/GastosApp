@@ -54,8 +54,8 @@ class UserController {
             const passwordCryptography = yield bcrypt.hash(password, saltRounds);
             yield this.userService.registerService({ username, email, passwordCryptography, role });
             const defaultValues = (0, gastosDefault_1.gastosDefault)(email);
-            const teste = defaultValues.map((el) => this.gastosService.insertGasto(el));
-            yield Promise.all(teste);
+            const values = defaultValues.map((el) => this.gastosService.insertGasto(el));
+            yield Promise.all(values);
             return res.status(201).json({ message: "Created" });
         });
     }

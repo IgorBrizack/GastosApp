@@ -5,6 +5,7 @@ import '../style.css';
 import Header from '../components/Header';
 import { getData, postData } from '../services/request';
 import PorcentagensComponent from '../components/Porcentagens';
+import GastosList from '../components/gastosList';
 
 ChartJS.register(...registerables);
 
@@ -116,16 +117,6 @@ function MainUserScreen() {
         {allChartData && (<PieChart chartData={allChartData} />)}
 
       </div>
-      {hasPercentages && (
-      <PorcentagensComponent
-        lazer={lazerPercentage}
-        servico={servicoPercentage}
-        educacao={eduPercentage}
-        investimento={investPercentage}
-        alimentacao={alimentacaoPercentage}
-      />
-      )}
-
       <h2>Inserir novo gasto</h2>
       <label htmlFor="dinheiro">
         R$
@@ -166,6 +157,16 @@ function MainUserScreen() {
       >
         Inserir
       </button>
+      {hasPercentages && (
+      <PorcentagensComponent
+        lazer={lazerPercentage}
+        servico={servicoPercentage}
+        educacao={eduPercentage}
+        investimento={investPercentage}
+        alimentacao={alimentacaoPercentage}
+      />
+      )}
+      <GastosList />
     </>
   );
 }

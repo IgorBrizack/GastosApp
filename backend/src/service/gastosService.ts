@@ -29,4 +29,12 @@ export default class GastosService {
     const [result] = await Sequelize.query(QUERY)
     return result
   }
+
+  public getGastoListFromUser = async(email: string) => {
+    const id = await this.getUserId(email)
+
+    const result = await Gasto.findAll({where: {user_id: id}})
+
+    return result
+  }
 }
