@@ -17,3 +17,14 @@ tbody {
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
 }
+
+
+tr th label input {
+  width: 50px;
+  height: 30px;
+}
+
+tr th label p {
+  width: 50px;
+  
+}

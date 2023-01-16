@@ -5,7 +5,7 @@ import '../style.css';
 import Header from '../components/Header';
 import { getData, postData } from '../services/request';
 import PorcentagensComponent from '../components/Porcentagens';
-import GastosList from '../components/gastosList';
+import GastosList from '../components/GastosList';
 
 ChartJS.register(...registerables);
 

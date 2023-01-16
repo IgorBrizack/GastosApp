@@ -3,6 +3,7 @@ import '../index.css';
 import PropTypes, { string } from 'prop-types';
 import UserContext from '../contexts/UserContext';
 import { getData } from '../services/request';
+import TrComponent from './TrComponent';
 
 function GastosList() {
   const {
@@ -24,23 +25,6 @@ function GastosList() {
   return (
     <div>
       <nav>
-        {/* <ul>
-          {gastoList.length > 0 && (
-            gastoList.map((el) => (
-              <li key={el.id}>
-                <div style={{
-                  display: 'flex',
-                }}
-                >
-                  <p>{el.value}</p>
-                  <p>{el.type}</p>
-                  <p>{el.gastoDate}</p>
-                  <button type="button">Editar</button>
-                </div>
-              </li>
-            ))
-          )}
-        </ul> */}
         <table>
           <thead>
             <tr>
@@ -52,15 +36,7 @@ function GastosList() {
           </thead>
           <tbody>
             {gastoList.length > 0 && (
-              gastoList.map((el) => (
-                <tr key={el.id}>
-                  <th>{el.value}</th>
-                  <th>{el.type}</th>
-                  <th>{el.gastoDate}</th>
-                  <th><button type="button">Editar</button></th>
-                </tr>
-              ))
-            )}
+              gastoList.map((el) => <TrComponent element={el} />))}
           </tbody>
         </table>
       </nav>
