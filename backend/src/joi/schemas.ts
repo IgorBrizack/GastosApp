@@ -47,5 +47,16 @@ export const gastoSchema = Joi.object({
   date: Joi.date().utc().format(['YYYY/MM/DD', 'DD/MM/YYYY']),
 });
 
+export const gastoUpdateSchema = Joi.object({
+  value: Joi.number().required().messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+  type: Joi.string().required().messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields,
+  }),
+  date: Joi.date().utc().format(['YYYY/MM/DD', 'DD/MM/YYYY']),
+});
 
 

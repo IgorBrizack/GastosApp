@@ -131,7 +131,7 @@ function MainUserScreen() {
       </label>
       <label htmlFor="dinheiro">
         Tipo:
-        <select onChange={(e) => setSelectedType(e.target.value)} name="select">
+        <select onClick={(e) => setSelectedType(e.target.value)} name="select">
           <option value="alimentacao">Alimentação</option>
           <option value="servico">Serviços</option>
           <option value="investimento">Investimentos</option>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes, { string } from 'prop-types';
 import '../index.css';
+import { putData } from '../services/request';
 
 function TrComponent({ element }) {
   const [editar, setEditar] = useState(false);
@@ -14,6 +15,18 @@ function TrComponent({ element }) {
     investimento: 'Investimento',
     lazer: 'Lazer',
     educacao: 'Educação',
+  };
+
+  const upadteGasto = async () => {
+    const { id, userId } = element;
+    try {
+      await putData(`/gasto/${id}`, {
+        value: Number(value), type, date, userId,
+      });
+      return console.log('update');
+    } catch (error) {
+      return error.message;
+    }
   };
 
   useState(() => {
@@ -41,7 +54,10 @@ function TrComponent({ element }) {
         <label htmlFor={element.type}>
           {editar
             ? (
-              <select onChange={(e) => setType(e.target.value)} name="select">
+              <select
+                onClick={(e) => setType(e.target.value)}
+                name="select"
+              >
                 <option value="alimentacao">Alimentação</option>
                 <option value="servico">Serviços</option>
                 <option value="investimento">Investimentos</option>
@@ -68,7 +84,7 @@ function TrComponent({ element }) {
           : <p>{element.gastoDate}</p>}
       </th>
       <th><button type="button" onClick={() => setEditar(!editar)}>Editar</button></th>
-      <th><button type="button" disabled={!editar}>Salvar</button></th>
+      <th><button type="button" disabled={!editar} onClick={() => upadteGasto()}>Salvar</button></th>
       <th><button type="button">Deletar</button></th>
     </tr>
   );

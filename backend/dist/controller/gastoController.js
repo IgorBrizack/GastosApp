@@ -31,6 +31,16 @@ class GastoController {
                 return res.status(400).json({ message: 'Not found' });
             }
         });
+        this.getGastosUserList = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { email } = req.params;
+            try {
+                const gastos = yield this.gastoService.getGastoListFromUser(email);
+                return res.status(200).json(gastos);
+            }
+            catch (error) {
+                return res.status(400).json({ message: 'Not found' });
+            }
+        });
     }
 }
 exports.default = GastoController;

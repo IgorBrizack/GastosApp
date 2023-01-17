@@ -2,6 +2,7 @@ import gastoInterface from "../interfaces/gastoInterface";
 import { User } from "../database/models/User";
 import { Gasto } from "../database/models/Gasto";
 import Sequelize from "../database/models/index"
+import IGastoUpdate from "../interfaces/IGastoUpdate";
 
 export default class GastosService {
 
@@ -36,5 +37,12 @@ export default class GastosService {
     const result = await Gasto.findAll({where: {user_id: id}})
 
     return result
+  }
+
+  public update = async (id: string, body: IGastoUpdate) => {
+    const { value, type, date } = body
+    const update = await Gasto.update({value, type, gastoDate: date}, {where: { id} })
+    console.log(update)
+    return update
   }
 }

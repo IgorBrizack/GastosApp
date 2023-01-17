@@ -36,6 +36,11 @@ class GastosService {
             const [result] = yield index_1.default.query(QUERY);
             return result;
         });
+        this.getGastoListFromUser = (email) => __awaiter(this, void 0, void 0, function* () {
+            const id = yield this.getUserId(email);
+            const result = yield Gasto_1.Gasto.findAll({ where: { user_id: id } });
+            return result;
+        });
     }
 }
 exports.default = GastosService;
