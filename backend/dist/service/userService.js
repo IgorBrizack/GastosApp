@@ -47,9 +47,9 @@ class UserService {
             if (!userData)
                 throw new ErrorWithStatus_1.default('User not found', 400);
             if (userData && (yield bcrypt.compare(password, userData.password))) {
-                const { email, role } = userData;
+                const { email, role, username } = userData;
                 const token = this.generateToken.generate({ email, role });
-                return token;
+                return { token, email, role, username };
             }
             if (!userData)
                 throw new ErrorWithStatus_1.default('User not found', 400);
@@ -58,7 +58,7 @@ class UserService {
             const { username, email, passwordCryptography, role } = user;
             const hasUser = yield this.getByEmail(email);
             if (!hasUser) {
-                yield User_1.User.create({ username, email, passwordCryptography, role });
+                return yield User_1.User.create({ username, email, password: passwordCryptography, role });
             }
             throw new ErrorWithStatus_1.default('User already registered!', 409);
         });

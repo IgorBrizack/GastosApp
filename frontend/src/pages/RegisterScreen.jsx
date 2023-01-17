@@ -23,6 +23,7 @@ function RegisterScreen() {
     try {
       await postData('/register', body);
       setUserCreated(true);
+      setInvalidFields(false);
     } catch (error) {
       setInvalidFields(true);
     }

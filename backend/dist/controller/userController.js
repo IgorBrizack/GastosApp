@@ -37,19 +37,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const userService_1 = __importDefault(require("../service/userService"));
 const bcrypt = __importStar(require("bcryptjs"));
+const gastosService_1 = __importDefault(require("../service/gastosService"));
+const gastosDefault_1 = require("../helpers/gastosDefault");
 const saltRounds = 10;
 class UserController {
-    constructor(userService = new userService_1.default()) {
+    constructor(userService = new userService_1.default(), gastosService = new gastosService_1.default) {
         this.userService = userService;
+        this.gastosService = gastosService;
         this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { email, password } = req.body;
             const userData = yield this.userService.loginService(email, password);
-            res.status(201).json({ token: userData });
+            res.status(201).json(userData);
         });
         this.register = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { username, email, password, role } = req.body;
             const passwordCryptography = yield bcrypt.hash(password, saltRounds);
             yield this.userService.registerService({ username, email, passwordCryptography, role });
+            const defaultValues = (0, gastosDefault_1.gastosDefault)(email);
+            const values = defaultValues.map((el) => this.gastosService.insertGasto(el));
+            yield Promise.all(values);
             return res.status(201).json({ message: "Created" });
         });
     }

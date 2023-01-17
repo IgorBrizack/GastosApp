@@ -2,27 +2,27 @@ const Data = [
   {
     id: 1,
     type: 'Alimentação',
-    wasted: 100000,
+    value: 100000,
   },
   {
     id: 2,
     type: 'Serviços',
-    wasted: 90000,
+    value: 90000,
   },
   {
     id: 3,
     type: 'Investimentos',
-    wasted: 70000,
+    value: 70000,
   },
   {
     id: 4,
     type: 'Lazer',
-    wasted: 70000,
+    value: 70000,
   },
   {
     id: 5,
     type: 'Educação',
-    wasted: 50000,
+    value: 50000,
   },
 ];
 

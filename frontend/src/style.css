@@ -9,3 +9,23 @@
   justify-content: space-between;
   align-items: center;
 }
+
+thead, tbody { display: block; }
+
+tbody {
+    height: 200px;       /* Just for the demo          */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+    width: 550px;
+}
+
+
+tr th label input {
+  width: 100px;
+  height: 30px;
+}
+
+tr th label p {
+  width: 100px;
+  
+}
