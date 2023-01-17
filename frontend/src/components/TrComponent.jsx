@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes, { string } from 'prop-types';
 import '../index.css';
-import { putData } from '../services/request';
+import { deleteData, putData } from '../services/request';
 import UserContext from '../contexts/UserContext';
 
 function TrComponent({ element }) {
@@ -32,6 +32,17 @@ function TrComponent({ element }) {
     }
   };
 
+  const deleteGasto = async () => {
+    const { id } = element;
+
+    try {
+      await deleteData(`/gasto/${id}`);
+      return setHasUpdated(!hasUpdated);
+    } catch (error) {
+      return error.message;
+    }
+  };
+
   useState(() => {
     setValue(element.value);
     setType(element.type);
@@ -45,6 +56,10 @@ function TrComponent({ element }) {
           {editar
             ? (
               <input
+                type="number"
+                step="0.01"
+                name="quantity"
+                min="0.01"
                 id={element.id}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -88,7 +103,7 @@ function TrComponent({ element }) {
       </th>
       <th><button type="button" onClick={() => setEditar(!editar)}>Editar</button></th>
       <th><button type="button" disabled={!editar} onClick={() => upadteGasto()}>Salvar</button></th>
-      <th><button type="button">Deletar</button></th>
+      <th><button type="button" onClick={() => deleteGasto()}>Deletar</button></th>
     </tr>
   );
 }

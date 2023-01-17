@@ -12,5 +12,6 @@ gastoRouter.post('/gasto',validateJWT, gastoValidation, gastoController.insert)
 gastoRouter.get('/gasto/:email', validateJWT, gastoController.getGastosUser)
 gastoRouter.get('/gasto/:email/list', validateJWT, gastoController.getGastosUserList)
 gastoRouter.put('/gasto/:id', validateJWT, gastoUpdateValidation, gastoController.updateGasto)
+gastoRouter.delete('/gasto/:id', validateJWT, gastoController.deleteGasto)
 
 export default gastoRouter

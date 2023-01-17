@@ -32,9 +32,17 @@ export default class GastoController {
 
   public updateGasto = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { body } = req
+    const { body } = req;
     await this.gastoService.update(id, body)
 
     return res.status(201).json({message: 'Updated'})
+  }
+
+  public deleteGasto = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    await this.gastoService.delete(id)
+
+    return res.status(201).json({message: 'Deleted'})
   }
 }

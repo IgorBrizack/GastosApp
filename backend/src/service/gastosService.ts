@@ -43,4 +43,8 @@ export default class GastosService {
     const { value, type, date } = body;
     await Gasto.update({value, type, gastoDate: date}, {where: { id } });
   }
+
+  public delete = async (id: string) => {
+    await Gasto.destroy({where: { id }})
+  }
 }

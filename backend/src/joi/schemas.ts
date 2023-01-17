@@ -36,7 +36,7 @@ export const gastoSchema = Joi.object({
     'string.empty': StringEmpty,
     'any.required': InvalidFields,
   }),
-  value: Joi.number().required().messages({
+  value: Joi.number().required().min(1).messages({
     'string.empty': StringEmpty,
     'any.required': InvalidFields,
   }),
@@ -48,7 +48,7 @@ export const gastoSchema = Joi.object({
 });
 
 export const gastoUpdateSchema = Joi.object({
-  value: Joi.number().required().messages({
+  value: Joi.number().required().min(1).messages({
     'string.empty': StringEmpty,
     'any.required': InvalidFields,
   }),

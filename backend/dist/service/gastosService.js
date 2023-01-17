@@ -41,6 +41,13 @@ class GastosService {
             const result = yield Gasto_1.Gasto.findAll({ where: { user_id: id } });
             return result;
         });
+        this.update = (id, body) => __awaiter(this, void 0, void 0, function* () {
+            const { value, type, date } = body;
+            yield Gasto_1.Gasto.update({ value, type, gastoDate: date }, { where: { id } });
+        });
+        this.delete = (id) => __awaiter(this, void 0, void 0, function* () {
+            yield Gasto_1.Gasto.destroy({ where: { id } });
+        });
     }
 }
 exports.default = GastosService;

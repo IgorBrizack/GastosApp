@@ -41,6 +41,17 @@ class GastoController {
                 return res.status(400).json({ message: 'Not found' });
             }
         });
+        this.updateGasto = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const { body } = req;
+            yield this.gastoService.update(id, body);
+            return res.status(201).json({ message: 'Updated' });
+        });
+        this.deleteGasto = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield this.gastoService.delete(id);
+            return res.status(201).json({ message: 'Deleted' });
+        });
     }
 }
 exports.default = GastoController;

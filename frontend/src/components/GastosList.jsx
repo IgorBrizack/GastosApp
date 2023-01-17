@@ -16,7 +16,8 @@ function GastosList() {
     const { email } = JSON.parse(localStorage.getItem('user'));
 
     const result = await getData(`/gasto/${email}/list`);
-    setGastoList(result);
+    const filteredResultsWithValues = result.filter((e) => e.value > 0);
+    setGastoList(filteredResultsWithValues);
   };
 
   useEffect(() => {

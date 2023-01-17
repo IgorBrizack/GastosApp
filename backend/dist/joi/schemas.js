@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gastoSchema = exports.registerSchema = exports.loginSchema = void 0;
+exports.gastoUpdateSchema = exports.gastoSchema = exports.registerSchema = exports.loginSchema = void 0;
 const Joi = require('joi')
     .extend(require('@joi/date'));
 const StringEmpty = 'Some required fields are missing';
@@ -35,7 +35,18 @@ exports.gastoSchema = Joi.object({
         'string.empty': StringEmpty,
         'any.required': InvalidFields,
     }),
-    value: Joi.number().required().messages({
+    value: Joi.number().required().min(1).messages({
+        'string.empty': StringEmpty,
+        'any.required': InvalidFields,
+    }),
+    type: Joi.string().required().messages({
+        'string.empty': StringEmpty,
+        'any.required': InvalidFields,
+    }),
+    date: Joi.date().utc().format(['YYYY/MM/DD', 'DD/MM/YYYY']),
+});
+exports.gastoUpdateSchema = Joi.object({
+    value: Joi.number().required().min(1).messages({
         'string.empty': StringEmpty,
         'any.required': InvalidFields,
     }),
