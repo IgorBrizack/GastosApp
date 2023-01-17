@@ -7,6 +7,7 @@ import TrComponent from './TrComponent';
 
 function GastosList() {
   const {
+    hasUpdated,
     gastoList,
     setGastoList,
   } = useContext(UserContext);
@@ -20,7 +21,7 @@ function GastosList() {
 
   useEffect(() => {
     loadGastos();
-  }, []);
+  }, [hasUpdated]);
 
   return (
     <div>

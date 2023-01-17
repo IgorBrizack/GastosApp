@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import PieChart from '../components/PieChart';
 import '../style.css';
@@ -6,15 +6,18 @@ import Header from '../components/Header';
 import { getData, postData } from '../services/request';
 import PorcentagensComponent from '../components/Porcentagens';
 import GastosList from '../components/GastosList';
+import UserContext from '../contexts/UserContext';
+import loading from '../images/loading.gif';
 
 ChartJS.register(...registerables);
 
 function MainUserScreen() {
+  const { hasUpdated, setHasUpdated } = useContext(UserContext);
   const [selectedType, setSelectedType] = useState('alimentacao');
   const [date, setDate] = useState();
-  const [valueGasto, setValueGasto] = useState('0');
+  const [valueGasto, setValueGasto] = useState();
   const [allChartData, setChartData] = useState();
-  const [render, setRender] = useState(true);
+  // const [render, setRender] = useState(true);
   const [hasPercentages, setHasPercentages] = useState(false);
   const [eduPercentage, setEduPercentage] = useState();
   const [lazerPercentage, setLazerPercentage] = useState();
@@ -95,9 +98,13 @@ function MainUserScreen() {
     const { email } = JSON.parse(localStorage.getItem('user'));
     try {
       await postData('/gasto', {
-        email, value: Number(valueGasto), type: selectedType, date,
+        email,
+        value: Number(valueGasto),
+        type: selectedType,
+        date: date.split('-').reverse().join('/'),
       });
-      return setRender(!render);
+
+      return setHasUpdated(!hasUpdated);
     } catch (error) {
       return error.message;
     }
@@ -106,7 +113,7 @@ function MainUserScreen() {
   useEffect(() => {
     setHasPercentages(false);
     getAllData();
-  }, [render]);
+  }, [hasUpdated]);
 
   return (
     <>
@@ -114,8 +121,9 @@ function MainUserScreen() {
       <div
         className="pie-chart-from-users"
       >
-        {allChartData && (<PieChart chartData={allChartData} />)}
-
+        {allChartData
+          ? (<PieChart chartData={allChartData} />)
+          : <img alt="loading" src={loading} />}
       </div>
       <h2>Inserir novo gasto</h2>
       <label htmlFor="dinheiro">
@@ -142,7 +150,7 @@ function MainUserScreen() {
       <label htmlFor="insert-date-input">
         Data:
         <input
-          onChange={(e) => setDate(e.target.value.split('-').reverse().join('/'))}
+          onChange={(e) => setDate(e.target.value)}
           value={date}
           type="date"
           id="insert-date-input"

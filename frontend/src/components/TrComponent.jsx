@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes, { string } from 'prop-types';
 import '../index.css';
 import { putData } from '../services/request';
+import UserContext from '../contexts/UserContext';
 
 function TrComponent({ element }) {
+  const { hasUpdated, setHasUpdated } = useContext(UserContext);
   const [editar, setEditar] = useState(false);
   const [value, setValue] = useState();
   const [type, setType] = useState();
@@ -18,12 +20,13 @@ function TrComponent({ element }) {
   };
 
   const upadteGasto = async () => {
-    const { id, userId } = element;
+    const { id } = element;
     try {
       await putData(`/gasto/${id}`, {
-        value: Number(value), type, date, userId,
+        value: Number(value), type, date: date.split('-').reverse().join('/'),
       });
-      return console.log('update');
+      setEditar(false);
+      return setHasUpdated(!hasUpdated);
     } catch (error) {
       return error.message;
     }
@@ -32,8 +35,8 @@ function TrComponent({ element }) {
   useState(() => {
     setValue(element.value);
     setType(element.type);
-    setDate(element.gastoDate);
-  }, [editar, type, value, date]);
+    setDate(element.gastoDate.split('/').reverse().join('-'));
+  }, [editar, type, value, date, hasUpdated]);
 
   return (
     <tr>
@@ -72,7 +75,7 @@ function TrComponent({ element }) {
         {editar
           ? (
             <input
-              onChange={(e) => setDate(e.target.value.split('-').reverse().join('/'))}
+              onChange={(e) => setDate(e.target.value)}
               value={date}
               type="date"
               id="insert-date-input"

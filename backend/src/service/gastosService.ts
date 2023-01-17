@@ -7,16 +7,16 @@ import IGastoUpdate from "../interfaces/IGastoUpdate";
 export default class GastosService {
 
   public getUserId = async (email: string): Promise<Number> => {
-    const userData: any = await User.findOne({ where: { email } })
-    const { id } = userData
-    return id
+    const userData: any = await User.findOne({ where: { email } });
+    const { id } = userData;
+    return id;
   }
 
   public insertGasto = async (data: gastoInterface) => {
-    const { email, type, value, date  } = data
-    const id = await this.getUserId(email)
+    const { email, type, value, date  } = data;
+    const id = await this.getUserId(email);
 
-    await Gasto.create({userId: Number(id), type, value, gastoDate: date})
+    await Gasto.create({userId: Number(id), type, value, gastoDate: date});
   }
 
   public getAllGastosFromUser = async (email: string) => {
@@ -27,22 +27,20 @@ export default class GastosService {
     AND (type = 'alimentacao' OR type = 'servico' OR type = 'investimento' OR type = 'lazer' OR type = 'educacao')
     GROUP BY user_id, type`;
 
-    const [result] = await Sequelize.query(QUERY)
-    return result
+    const [result] = await Sequelize.query(QUERY);
+    return result;
   }
 
   public getGastoListFromUser = async(email: string) => {
-    const id = await this.getUserId(email)
+    const id = await this.getUserId(email);
 
-    const result = await Gasto.findAll({where: {user_id: id}})
+    const result = await Gasto.findAll({where: {user_id: id}});
 
-    return result
+    return result;
   }
 
   public update = async (id: string, body: IGastoUpdate) => {
-    const { value, type, date } = body
-    const update = await Gasto.update({value, type, gastoDate: date}, {where: { id} })
-    console.log(update)
-    return update
+    const { value, type, date } = body;
+    await Gasto.update({value, type, gastoDate: date}, {where: { id } });
   }
 }
