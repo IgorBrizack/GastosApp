@@ -51,6 +51,12 @@ function MainUserScreen() {
     setHasPercentages(true);
   };
 
+  const isAdmin = () => {
+    const { role } = JSON.parse(localStorage.getItem('user'));
+    if (role === 'admin') return true;
+    return false;
+  };
+
   const formatedData = (data) => {
     getPercentages(data);
     const labels = {
@@ -86,6 +92,16 @@ function MainUserScreen() {
 
   const getAllData = async () => {
     const { email } = JSON.parse(localStorage.getItem('user'));
+
+    if (isAdmin()) {
+      try {
+        const data = await getData('/gasto');
+        return formatedData(data);
+      } catch (error) {
+        return error.message;
+      }
+    }
+
     try {
       const data = await getData(`/gasto/${email}`);
       return formatedData(data);
@@ -113,6 +129,7 @@ function MainUserScreen() {
   useEffect(() => {
     setHasPercentages(false);
     getAllData();
+    isAdmin();
   }, [hasUpdated]);
 
   return (
@@ -137,6 +154,7 @@ function MainUserScreen() {
           />
           )}
         </div>
+        {!isAdmin() && (
         <div className="inserir-gastos-main-container">
           <h2>Inserir novo gasto</h2>
           <label htmlFor="dinheiro">
@@ -182,8 +200,9 @@ function MainUserScreen() {
             Inserir
           </button>
         </div>
+        )}
       </div>
-      <GastosList />
+      {!isAdmin() && <GastosList /> }
     </>
   );
 }

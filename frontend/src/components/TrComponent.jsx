@@ -70,7 +70,7 @@ function TrComponent({ element }) {
                 />
               </div>
             )
-            : <p className="gastos-list-inputs">{element.value}</p>}
+            : <p className="gastos-list-inputs">{element.value.replace('.', ',')}</p>}
         </label>
       </th>
       <th>

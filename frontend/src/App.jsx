@@ -13,6 +13,7 @@ function App() {
         <Route exact path="/" element={<Navigate to="/login" />} />
         <Route path="/user" element={<MainUserScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
+        <Route path="/admin" element={<MainUserScreen />} />
       </Routes>
     </UserProvider>
   );

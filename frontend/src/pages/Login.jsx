@@ -19,6 +19,7 @@ function Login() {
       }
       const { role } = JSON.parse(localStorage.getItem('user'));
       if (role === 'user') navigate('/user');
+      if (role === 'admin') navigate('/admin');
       return null;
     };
 

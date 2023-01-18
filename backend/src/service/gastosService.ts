@@ -47,4 +47,12 @@ export default class GastosService {
   public delete = async (id: string) => {
     await Gasto.destroy({where: { id }})
   }
+
+  public allGasto = async () => {
+    const QUERY = `SELECT type, SUM(value) as value FROM gastos_app_db.gastos
+    GROUP BY type`;
+
+    const [result] = await Sequelize.query(QUERY);
+    return result;
+  }
 }

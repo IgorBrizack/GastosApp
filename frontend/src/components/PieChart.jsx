@@ -10,7 +10,6 @@ function PieChart({ chartData }) {
     <div style={
       {
         padding: '20px',
-        // width: '50%',
       }
     }
     >

@@ -45,4 +45,10 @@ export default class GastoController {
 
     return res.status(201).json({message: 'Deleted'})
   }
+
+  public getAllGastos = async (req: Request, res: Response) => {
+    const allGasto = await this.gastoService.allGasto()
+
+    return res.status(201).json(allGasto)
+  }
 }
