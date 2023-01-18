@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../bootstrap.min.css';
 
 function PorcentagensComponent({
   lazer, investimento, educacao, servico, alimentacao,
 }) {
   return (
     <div>
-      <h2>Porcentagens</h2>
-      <p>
-        {`Lazer ${lazer ? Number(lazer).toFixed(2) : 0}%`}
+      <p className="font-monospace">
+        {`Lazer: ${lazer ? Number(lazer).toFixed(2) : 0}%`}
       </p>
-      <p>
-        {`Educação ${educacao ? Number(educacao).toFixed(2) : 0}%`}
+      <p className="font-monospace">
+        {`Educação: ${educacao ? Number(educacao).toFixed(2) : 0}%`}
       </p>
-      <p>
-        {`Investimento ${investimento ? Number(investimento).toFixed(2) : 0}%`}
+      <p className="font-monospace">
+        {`Investimento: ${investimento ? Number(investimento).toFixed(2) : 0}%`}
       </p>
-      <p>
-        {`Alimentação ${alimentacao ? Number(alimentacao).toFixed(2) : 0}%`}
+      <p className="font-monospace">
+        {`Alimentação: ${alimentacao ? Number(alimentacao).toFixed(2) : 0}%`}
       </p>
-      <p>
-        {`Serviço ${servico ? Number(servico).toFixed(2) : 0}%`}
+      <p className="font-monospace">
+        {`Serviço: ${servico ? Number(servico).toFixed(2) : 0}%`}
       </p>
     </div>
   );

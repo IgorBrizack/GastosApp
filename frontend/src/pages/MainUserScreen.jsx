@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import PieChart from '../components/PieChart';
+import '../bootstrap.min.css';
 import '../style.css';
 import Header from '../components/Header';
 import { getData, postData } from '../services/request';
@@ -17,7 +18,6 @@ function MainUserScreen() {
   const [date, setDate] = useState();
   const [valueGasto, setValueGasto] = useState();
   const [allChartData, setChartData] = useState();
-  // const [render, setRender] = useState(true);
   const [hasPercentages, setHasPercentages] = useState(false);
   const [eduPercentage, setEduPercentage] = useState();
   const [lazerPercentage, setLazerPercentage] = useState();
@@ -118,62 +118,71 @@ function MainUserScreen() {
   return (
     <>
       <Header />
-      <div
-        className="pie-chart-from-users"
-      >
-        {allChartData
-          ? (<PieChart chartData={allChartData} />)
-          : <img alt="loading" src={loading} />}
+      <div id="user-screen-main-container">
+        <div className="pie-and-percentage-main-container">
+          <div
+            className="pie-chart-from-users"
+          >
+            {allChartData
+              ? (<PieChart chartData={allChartData} />)
+              : <img alt="loading" src={loading} />}
+          </div>
+          {hasPercentages && (
+          <PorcentagensComponent
+            lazer={lazerPercentage}
+            servico={servicoPercentage}
+            educacao={eduPercentage}
+            investimento={investPercentage}
+            alimentacao={alimentacaoPercentage}
+          />
+          )}
+        </div>
+        <div className="inserir-gastos-main-container">
+          <h2>Inserir novo gasto</h2>
+          <label htmlFor="dinheiro">
+            R$
+            <input
+              className="form-control"
+              onChange={(e) => setValueGasto(e.target.value)}
+              id="dinheiro"
+              type="number"
+              step="0.01"
+              name="quantity"
+              min="0.01"
+            />
+          </label>
+          <label htmlFor="dinheiro">
+            Tipo:
+            <select className="form-select form-select-sm mb-3" onClick={(e) => setSelectedType(e.target.value)} name="select">
+              <option value="alimentacao">Alimentação</option>
+              <option value="servico">Serviços</option>
+              <option value="investimento">Investimentos</option>
+              <option value="lazer">Lazer</option>
+              <option value="educacao">Educação</option>
+            </select>
+          </label>
+          <label htmlFor="insert-date-input">
+            Data:
+            <input
+              className="form-control"
+              onChange={(e) => setDate(e.target.value)}
+              value={date}
+              type="date"
+              id="insert-date-input"
+              name="gasto-date"
+              min="2000-01-01"
+              max="2030-01-01"
+            />
+          </label>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() => insertGasto()}
+          >
+            Inserir
+          </button>
+        </div>
       </div>
-      <h2>Inserir novo gasto</h2>
-      <label htmlFor="dinheiro">
-        R$
-        <input
-          onChange={(e) => setValueGasto(e.target.value)}
-          id="dinheiro"
-          type="number"
-          step="0.01"
-          name="quantity"
-          min="0.01"
-        />
-      </label>
-      <label htmlFor="dinheiro">
-        Tipo:
-        <select onClick={(e) => setSelectedType(e.target.value)} name="select">
-          <option value="alimentacao">Alimentação</option>
-          <option value="servico">Serviços</option>
-          <option value="investimento">Investimentos</option>
-          <option value="lazer">Lazer</option>
-          <option value="educacao">Educação</option>
-        </select>
-      </label>
-      <label htmlFor="insert-date-input">
-        Data:
-        <input
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
-          type="date"
-          id="insert-date-input"
-          name="gasto-date"
-          min="2000-01-01"
-          max="2030-01-01"
-        />
-      </label>
-      <button
-        type="button"
-        onClick={() => insertGasto()}
-      >
-        Inserir
-      </button>
-      {hasPercentages && (
-      <PorcentagensComponent
-        lazer={lazerPercentage}
-        servico={servicoPercentage}
-        educacao={eduPercentage}
-        investimento={investPercentage}
-        alimentacao={alimentacaoPercentage}
-      />
-      )}
       <GastosList />
     </>
   );

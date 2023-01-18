@@ -1,6 +1,9 @@
+body {
+  background-color: rgb(206, 205, 205);
+}
+
 .pie-chart-from-users {
   width: 300px;
-  border-style: solid;
 }
 
 .header-main-container {
@@ -8,17 +11,52 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
 }
 
-thead, tbody { display: block; }
+#user-screen-main-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgb(206, 205, 205);
+}
+
+.inserir-gastos-main-container {
+  height: 350px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 10%;
+  width: 20%;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+tbody { display: block; }
+
+thead {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+  width: auto;
+}
+
+.gasto-table-main-container {
+  width: 650px;
+  margin: auto;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 
 tbody {
     height: 200px;       /* Just for the demo          */
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
-    width: 550px;
 }
-
 
 tr th label input {
   width: 100px;
@@ -27,5 +65,13 @@ tr th label input {
 
 tr th label p {
   width: 100px;
-  
+}
+
+.pie-and-percentage-main-container {
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
 }

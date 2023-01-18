@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import '../index.css';
+import '../style.css';
 import PropTypes, { string } from 'prop-types';
 import UserContext from '../contexts/UserContext';
 import { getData } from '../services/request';
@@ -25,27 +25,15 @@ function GastosList() {
   }, [hasUpdated]);
 
   return (
-    <div>
-      <nav>
-        <table>
-          <thead>
-            <tr>
-              <th>Valor em R$</th>
-              <th>Tipo</th>
-              <th>Data</th>
-              <th>Editar</th>
-              <th>Salvar</th>
-              <th>Deletar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {gastoList.length > 0 && (
-              gastoList.map((el) => (
-                <TrComponent element={el} key={el.id} />
-              )))}
-          </tbody>
-        </table>
-      </nav>
+    <div className="gasto-table-main-container">
+      <table className="table">
+        <tbody>
+          {gastoList.length > 0 && (
+            gastoList.map((el) => (
+              <TrComponent element={el} key={el.id} />
+            )))}
+        </tbody>
+      </table>
     </div>
   );
 }

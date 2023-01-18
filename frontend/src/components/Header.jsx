@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import '../bootstrap.min.css';
+import '../style.css';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
@@ -24,13 +26,15 @@ function Header() {
         gastosApp
       </h1>
       <p>{userName}</p>
-      <button
-        type="button"
-        onClick={() => logout()}
-      >
-        Logout
-
-      </button>
+      <div>
+        <button
+          className="btn btn-dark"
+          type="button"
+          onClick={() => logout()}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
