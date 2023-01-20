@@ -51,4 +51,10 @@ export default class GastoController {
 
     return res.status(201).json(allGasto)
   }
+
+  public getAllGastosWithDate = async(req: Request, res: Response) => {
+    const allGastoWithDate = await this.gastoService.allGastoWithDate()
+
+    return res.status(201).json(allGastoWithDate)
+  }
 }

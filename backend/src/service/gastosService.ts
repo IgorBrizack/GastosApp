@@ -55,4 +55,10 @@ export default class GastosService {
     const [result] = await Sequelize.query(QUERY);
     return result;
   }
+
+  public allGastoWithDate = async () => {
+    const result = Gasto.findAll()
+
+    return result
+  }
 }

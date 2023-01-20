@@ -9,11 +9,19 @@ import PorcentagensComponent from '../components/Porcentagens';
 import GastosList from '../components/GastosList';
 import UserContext from '../contexts/UserContext';
 import loading from '../images/loading.gif';
+import BarChart from '../components/BarChart';
 
 ChartJS.register(...registerables);
 
 function MainUserScreen() {
-  const { hasUpdated, setHasUpdated } = useContext(UserContext);
+  const {
+    hasUpdated,
+    setHasUpdated,
+    adminPorcentagens,
+    setAdminPorcentagens,
+    gastoMensal,
+    setGastoMensal,
+  } = useContext(UserContext);
   const [selectedType, setSelectedType] = useState('alimentacao');
   const [date, setDate] = useState();
   const [valueGasto, setValueGasto] = useState();
@@ -79,11 +87,11 @@ function MainUserScreen() {
         label: 'All data',
         data: formated.map((el) => Number(el.value)),
         backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-          'rgb(70, 158, 94)',
-          'rgb(114, 70, 158)',
+          'rgb(50,205,50)',
+          'rgb(64,224,208)',
+          'rgb(128,0,128)',
+          'rgb(131,111,255)',
+          'rgb(218,165,32)',
         ],
         hoverOffset: 4,
       }],
@@ -127,6 +135,8 @@ function MainUserScreen() {
   };
 
   useEffect(() => {
+    setGastoMensal(false);
+    setAdminPorcentagens(true);
     setHasPercentages(false);
     getAllData();
     isAdmin();
@@ -136,6 +146,7 @@ function MainUserScreen() {
     <>
       <Header />
       <div id="user-screen-main-container">
+        {adminPorcentagens && (
         <div className="pie-and-percentage-main-container">
           <div
             className="pie-chart-from-users"
@@ -154,6 +165,7 @@ function MainUserScreen() {
           />
           )}
         </div>
+        )}
         {!isAdmin() && (
         <div className="inserir-gastos-main-container">
           <h2>Inserir novo gasto</h2>
@@ -188,7 +200,7 @@ function MainUserScreen() {
               type="date"
               id="insert-date-input"
               name="gasto-date"
-              min="2000-01-01"
+              min="2023-01-01"
               max="2030-01-01"
             />
           </label>
@@ -202,6 +214,7 @@ function MainUserScreen() {
         </div>
         )}
       </div>
+      {gastoMensal && <BarChart />}
       {!isAdmin() && <GastosList /> }
     </>
   );

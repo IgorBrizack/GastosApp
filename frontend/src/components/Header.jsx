@@ -1,11 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../bootstrap.min.css';
 import '../style.css';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 function Header() {
   const navigate = useNavigate();
+  const {
+    setAdminPorcentagens,
+    setGastoMensal,
+  } = useContext(UserContext);
   const [userName, setUserName] = useState('');
+
+  const onlyPorcentagens = () => {
+    setGastoMensal(false);
+    setAdminPorcentagens(true);
+  };
+
+  const onlyGastoMensal = () => {
+    setAdminPorcentagens(false);
+    setGastoMensal(true);
+  };
+
+  const isAdmin = () => {
+    const { role } = JSON.parse(localStorage.getItem('user'));
+    if (role === 'admin') return true;
+    return false;
+  };
 
   const logout = () => {
     localStorage.clear();
@@ -23,18 +44,50 @@ function Header() {
   return (
     <div className="header-main-container">
       <h1>
-        gastosApp
+        MeusGastos.com
       </h1>
       <p>{userName}</p>
-      <div>
-        <button
-          className="btn btn-dark"
-          type="button"
-          onClick={() => logout()}
-        >
-          Logout
-        </button>
-      </div>
+      {isAdmin() ? (
+        <div>
+          <button
+            className="btn btn-dark"
+            type="button"
+            onClick={() => onlyPorcentagens()}
+          >
+            Porcentagens
+          </button>
+          <button
+            className="btn btn-dark"
+            type="button"
+            onClick={() => onlyGastoMensal()}
+          >
+            Gasto Mensal
+          </button>
+          <button
+            className="btn btn-dark"
+            type="button"
+          >
+            Logs
+          </button>
+          <button
+            className="btn btn-dark"
+            type="button"
+            onClick={() => logout()}
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div>
+          <button
+            className="btn btn-dark"
+            type="button"
+            onClick={() => logout()}
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </div>
   );
 }

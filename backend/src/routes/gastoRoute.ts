@@ -10,6 +10,7 @@ const gastoController = new GastoController();
 
 gastoRouter.post('/gasto',validateJWT, gastoValidation, gastoController.insert)
 gastoRouter.get('/gasto', validateJWT, gastoController.getAllGastos)
+gastoRouter.get('/gasto/dates', validateJWT, gastoController.getAllGastosWithDate)
 gastoRouter.get('/gasto/:email', validateJWT, gastoController.getGastosUser)
 gastoRouter.get('/gasto/:email/list', validateJWT, gastoController.getGastosUserList)
 gastoRouter.put('/gasto/:id', validateJWT, gastoUpdateValidation, gastoController.updateGasto)

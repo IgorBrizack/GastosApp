@@ -6,6 +6,14 @@ body {
   width: 300px;
 }
 
+.bar-chart {
+  margin: auto;
+  width: 500px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .header-main-container {
   display: flex;
   width: 100%;
