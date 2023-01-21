@@ -56,65 +56,37 @@ function BarChart() {
   };
 
   const monthValues = (jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez) => {
-    const janTotal = jan.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const toReduceMonthValue = (month) => {
+      const total = month.reduce((acc, el) => {
+        const sum = acc + Number(el.value);
+        return sum;
+      }, 0);
+      return total;
+    };
 
-    const fevTotal = fev.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const janTotal = toReduceMonthValue(jan);
 
-    const marTotal = mar.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const fevTotal = toReduceMonthValue(fev);
 
-    const abrTotal = abr.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const marTotal = toReduceMonthValue(mar);
 
-    const maiTotal = mai.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const abrTotal = toReduceMonthValue(abr);
 
-    const junTotal = jun.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const maiTotal = toReduceMonthValue(mai);
 
-    const julTotal = jul.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const junTotal = toReduceMonthValue(jun);
 
-    const agoTotal = ago.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const julTotal = toReduceMonthValue(jul);
 
-    const setTotal = set.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const agoTotal = toReduceMonthValue(ago);
 
-    const outTotal = out.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const setTotal = toReduceMonthValue(set);
 
-    const novTotal = nov.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const outTotal = toReduceMonthValue(out);
 
-    const dezTotal = dez.reduce((acc, el) => {
-      const sum = acc + Number(el.value);
-      return sum;
-    }, 0);
+    const novTotal = toReduceMonthValue(nov);
+
+    const dezTotal = toReduceMonthValue(dez);
 
     setMonthsValues({
       janeiro: janTotal,
