@@ -1,4 +1,4 @@
 export interface tokenInterface {
-  email: string;
+  email: string
   role: string
 }

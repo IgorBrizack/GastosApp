@@ -7,8 +7,8 @@ export enum gastosType {
 }
 
 export default interface gastoInterface {
-  email: string,
-  value: number,
-  type: gastosType,
+  email: string
+  value: number
+  type: gastosType
   date: string
 }
