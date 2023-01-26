@@ -7,7 +7,7 @@ export default class GastoController {
   public insert = async (req: Request, res: Response): Promise<any> => {
     const { email, type, value, date } = req.body
     await this.gastoService.insertGasto({ email, type, value, date })
-    res.status(201).json({ message: 'inserido' })
+    return res.status(201).json({ message: 'inserido' })
   }
 
   public getGastosUser = async (req: Request, res: Response): Promise<any> => {
@@ -20,41 +20,41 @@ export default class GastoController {
     }
   }
 
-  public getGastosUserList = async (req: Request, res: Response): Promise<any> => {
+  public getGastosUserList = async (req: Request, res: Response): Promise<void> => {
     const { email } = req.params
     try {
       const gastos = await this.gastoService.getGastoListFromUser(email)
-      return res.status(200).json(gastos)
+      res.status(200).json(gastos)
     } catch (error) {
-      return res.status(400).json({ message: 'Not found' })
+      res.status(400).json({ message: 'Not found' })
     }
   }
 
-  public updateGasto = async (req: Request, res: Response): Promise<any> => {
+  public updateGasto = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params
     const { body } = req
     await this.gastoService.update(id, body)
 
-    return res.status(201).json({ message: 'Updated' })
+    res.status(201).json({ message: 'Updated' })
   }
 
-  public deleteGasto = async (req: Request, res: Response): Promise<any> => {
+  public deleteGasto = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params
 
     await this.gastoService.delete(id)
 
-    return res.status(201).json({ message: 'Deleted' })
+    res.status(201).json({ message: 'Deleted' })
   }
 
-  public getAllGastos = async (req: Request, res: Response): Promise<any> => {
+  public getAllGastos = async (req: Request, res: Response): Promise<void> => {
     const allGasto = await this.gastoService.allGasto()
 
-    return res.status(201).json(allGasto)
+    res.status(201).json(allGasto)
   }
 
-  public getAllGastosWithDate = async (req: Request, res: Response): Promise<any> => {
+  public getAllGastosWithDate = async (req: Request, res: Response): Promise<void> => {
     const allGastoWithDate = await this.gastoService.allGastoWithDate()
 
-    return res.status(201).json(allGastoWithDate)
+    res.status(201).json(allGastoWithDate)
   }
 }

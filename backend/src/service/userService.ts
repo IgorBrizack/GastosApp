@@ -39,4 +39,12 @@ export default class UserService {
     if (userByEmail) return true
     return false
   }
+
+  public usersList = async (): Promise<any> => {
+    const usersList = await User.findAll({
+      attributes: { exclude: ['password'] }
+    })
+
+    return usersList
+  }
 }

@@ -11,13 +11,13 @@ export default class UserController {
     private readonly userService = new UserService(),
     private readonly gastosService = new GastosService()) {}
 
-  public login = async (req: Request, res: Response): Promise<any> => {
+  public login = async (req: Request, res: Response): Promise<void> => {
     const { email, password } = req.body
     const userData = await this.userService.loginService(email, password)
     res.status(201).json(userData)
   }
 
-  public register = async (req: Request, res: Response): Promise<any> => {
+  public register = async (req: Request, res: Response): Promise<void> => {
     const { username, email, password, role } = req.body
 
     const passwordCryptography = await bcrypt.hash(password, saltRounds)
@@ -30,6 +30,12 @@ export default class UserController {
 
     await Promise.all(values)
 
-    return res.status(201).json({ message: 'Created' })
+    res.status(201).json({ message: 'Created' })
+  }
+
+  public users = async (req: Request, res: Response): Promise <void> => {
+    const usersList = await this.userService.usersList()
+
+    res.status(200).json(usersList)
   }
 }
