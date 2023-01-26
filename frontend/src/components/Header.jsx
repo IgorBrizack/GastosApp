@@ -57,13 +57,18 @@ function Header() {
       </h1>
       <p>{userName}</p>
       {isAdmin() ? (
-        <div>
+        <div style={{
+          display: 'flex',
+          width: '500px',
+          justifyContent: 'space-evenly',
+        }}
+        >
           <button
             className="btn btn-dark"
             type="button"
             onClick={() => onlyPorcentagens()}
           >
-            Porcentagens
+            Porcentagem Geral
           </button>
           <button
             className="btn btn-dark"

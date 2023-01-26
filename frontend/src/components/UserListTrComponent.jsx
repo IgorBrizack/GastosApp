@@ -23,58 +23,86 @@ function UserListTrComponent({ userData }) {
   return (
     <tr>
       <th>
-        <p>{`ID: ${id}`}</p>
+        <p style={{ width: '50px' }}>{`ID: ${id}`}</p>
       </th>
-      {editar ? (
-        <th>
-          <label style={{ display: 'flex' }} htmlFor={userData.userName}>
+      <th>
+        <label style={{ width: '120px' }} htmlFor={userData.userName}>
+          {editar ? (
             <div className="input-group input-group-sm">
               <input
                 id={userData.userName}
                 className="gastos-list-inputs"
+                style={{
+                  margin: 'auto',
+                  width: '120px',
+                }}
                 type="text"
-                placeholder={userName}
+                placeholder="Nome"
                 onChange={(e) => setUserName(e.target.value)}
               />
             </div>
-          </label>
-        </th>
-      ) : (
-        <th className="gastos-list-inputs">
-          <p>{userName}</p>
-        </th>
-      )}
-      {editar ? (
-        <div className="input-group input-group-sm">
-          <input
-            style={{
-              width: '50px',
-            }}
-            className="gastos-list-inputs"
-            type="text"
-            placeholder={email}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div>
-      ) : (
-        <th className="gastos-list-inputs">
-          <p>{email}</p>
-        </th>
-      )}
-      {editar ? (
-        <select
-          className="gastos-list-inputs form-select form-select-sm"
-          onClick={(e) => setUserRole(e.target.value)}
-          name="select"
-        >
-          <option value="user">Usuário</option>
-          <option value="admin">ADM</option>
-        </select>
-      ) : (
-        <th>
-          <p>{role}</p>
-        </th>
-      )}
+          ) : (
+            <p
+              style={{ margin: 'auto', textAlign: 'center', width: '120px' }}
+
+            >
+              {userName}
+
+            </p>
+          )}
+        </label>
+      </th>
+      <th>
+        <label style={{ width: '150px' }} htmlFor={userData.userEmail}>
+          {editar ? (
+            <div className="input-group input-group-sm">
+              <input
+                id={userData.userEmail}
+                className="gastos-list-inputs"
+                style={{
+                  margin: 'auto',
+                  width: '120px',
+                }}
+                type="text"
+                placeholder="Email"
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
+          ) : (
+            <p
+              style={{ margin: 'auto', textAlign: 'center' }}
+            >
+              {email}
+            </p>
+          )}
+        </label>
+      </th>
+      <th>
+        <label style={{ width: '125px' }} htmlFor={userData.userRole}>
+          {editar ? (
+            <select
+              id={userData.userRole}
+              className="gastos-list-inputs form-select form-select-sm"
+              style={{
+                margin: 'auto',
+                width: '100px',
+              }}
+              onClick={(e) => setUserRole(e.target.value)}
+              name="select"
+            >
+              <option value="user">Usuário</option>
+              <option value="admin">ADM</option>
+            </select>
+          ) : (
+            <p
+              style={{ margin: 'auto', textAlign: 'center' }}
+            >
+              {role}
+
+            </p>
+          )}
+        </label>
+      </th>
       <th>
         <button className="btn btn-primary btn-sm" type="button" onClick={() => setEditar(!editar)}>Editar</button>
       </th>

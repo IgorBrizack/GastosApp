@@ -16,7 +16,7 @@ function UserListTable() {
   }, []);
 
   return (
-    <div className="table-main-container">
+    <div className="user-table-main-container">
       <table className="table">
         <tbody>
           {usersList.length > 0 && usersList.map((e) => (
