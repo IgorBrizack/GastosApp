@@ -9,17 +9,26 @@ function Header() {
   const {
     setAdminPorcentagens,
     setGastoMensal,
+    setUsersList,
   } = useContext(UserContext);
   const [userName, setUserName] = useState('');
 
   const onlyPorcentagens = () => {
     setGastoMensal(false);
+    setUsersList(false);
     setAdminPorcentagens(true);
   };
 
   const onlyGastoMensal = () => {
     setAdminPorcentagens(false);
+    setUsersList(false);
     setGastoMensal(true);
+  };
+
+  const onlyUsersList = () => {
+    setAdminPorcentagens(false);
+    setGastoMensal(false);
+    setUsersList(true);
   };
 
   const isAdmin = () => {
@@ -66,8 +75,9 @@ function Header() {
           <button
             className="btn btn-dark"
             type="button"
+            onClick={() => onlyUsersList()}
           >
-            Logs
+            Usuários
           </button>
           <button
             className="btn btn-dark"

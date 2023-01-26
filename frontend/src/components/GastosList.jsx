@@ -25,7 +25,7 @@ function GastosList() {
   }, [hasUpdated]);
 
   return (
-    <div className="gasto-table-main-container">
+    <div className="table-main-container">
       <table className="table">
         <tbody>
           {gastoList.length > 0 && (

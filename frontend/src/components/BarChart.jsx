@@ -22,7 +22,7 @@ function BarChart() {
   });
 
   const data = {
-    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     datasets: [{
       label: 'Gasto Mensal Acumulado 2023 todos usuários',
       data: [
@@ -65,27 +65,16 @@ function BarChart() {
     };
 
     const janTotal = toReduceMonthValue(jan);
-
     const fevTotal = toReduceMonthValue(fev);
-
     const marTotal = toReduceMonthValue(mar);
-
     const abrTotal = toReduceMonthValue(abr);
-
     const maiTotal = toReduceMonthValue(mai);
-
     const junTotal = toReduceMonthValue(jun);
-
     const julTotal = toReduceMonthValue(jul);
-
     const agoTotal = toReduceMonthValue(ago);
-
     const setTotal = toReduceMonthValue(set);
-
     const outTotal = toReduceMonthValue(out);
-
     const novTotal = toReduceMonthValue(nov);
-
     const dezTotal = toReduceMonthValue(dez);
 
     setMonthsValues({

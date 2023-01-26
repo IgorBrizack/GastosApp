@@ -10,6 +10,7 @@ import GastosList from '../components/GastosList';
 import UserContext from '../contexts/UserContext';
 import loading from '../images/loading.gif';
 import BarChart from '../components/BarChart';
+import UserListTable from '../components/UserListTable';
 
 ChartJS.register(...registerables);
 
@@ -21,6 +22,8 @@ function MainUserScreen() {
     setAdminPorcentagens,
     gastoMensal,
     setGastoMensal,
+    setUsersList,
+    usersList,
   } = useContext(UserContext);
   const [selectedType, setSelectedType] = useState('alimentacao');
   const [date, setDate] = useState();
@@ -138,6 +141,7 @@ function MainUserScreen() {
     setGastoMensal(false);
     setAdminPorcentagens(true);
     setHasPercentages(false);
+    setUsersList(false);
     getAllData();
     isAdmin();
   }, [hasUpdated]);
@@ -155,15 +159,15 @@ function MainUserScreen() {
               ? (<PieChart chartData={allChartData} />)
               : <img alt="loading" src={loading} />}
           </div>
-          {hasPercentages && (
-          <PorcentagensComponent
-            lazer={lazerPercentage}
-            servico={servicoPercentage}
-            educacao={eduPercentage}
-            investimento={investPercentage}
-            alimentacao={alimentacaoPercentage}
-          />
-          )}
+          {hasPercentages ? (
+            <PorcentagensComponent
+              lazer={lazerPercentage}
+              servico={servicoPercentage}
+              educacao={eduPercentage}
+              investimento={investPercentage}
+              alimentacao={alimentacaoPercentage}
+            />
+          ) : <img alt="loading" src={loading} /> }
         </div>
         )}
         {!isAdmin() && (
@@ -215,6 +219,7 @@ function MainUserScreen() {
         )}
       </div>
       {gastoMensal && <BarChart />}
+      {usersList && <UserListTable />}
       {!isAdmin() && <GastosList /> }
     </>
   );
