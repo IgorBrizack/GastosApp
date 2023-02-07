@@ -4,6 +4,7 @@ import UserListTrComponent from './UserListTrComponent';
 import '../style.css';
 
 function UserListTable() {
+  const [render, setRender] = useState(false);
   const [usersList, setUsersList] = useState([]);
 
   const usersData = async () => {
@@ -12,15 +13,16 @@ function UserListTable() {
   };
 
   useEffect(() => {
+    setUsersList([]);
     usersData();
-  }, []);
+  }, [render]);
 
   return (
     <div className="user-table-main-container">
       <table className="table">
         <tbody>
           {usersList.length > 0 && usersList.map((e) => (
-            <UserListTrComponent userData={e} />
+            <UserListTrComponent key={e.email} userData={e} render={render} setRender={setRender} />
           ))}
         </tbody>
       </table>

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes, { string } from 'prop-types';
 import '../style.css';
+import { deleteData } from '../services/request';
 
-function UserListTrComponent({ userData }) {
+const userStorage = JSON.parse(localStorage.getItem('user'));
+
+function UserListTrComponent({ userData, render, setRender }) {
   const [userName, setUserName] = useState();
   const [id, setUserId] = useState();
   const [email, setUserEmail] = useState();
@@ -14,12 +17,18 @@ function UserListTrComponent({ userData }) {
     user: 'Usuário',
   };
 
+  const deleteUser = async (userEmail) => {
+    await deleteData(`/users/${userEmail}`);
+    setRender(!render);
+  };
+
   useEffect(() => {
     setUserName(userData.username);
     setUserId(userData.id);
     setUserEmail(userData.email);
     setUserRole(roleHelper[userData.role]);
   }, [userName, id, email, role]);
+
   return (
     <tr>
       <th>
@@ -90,7 +99,9 @@ function UserListTrComponent({ userData }) {
               onClick={(e) => setUserRole(e.target.value)}
               name="select"
             >
-              <option value="user">Usuário</option>
+              {userStorage.email !== userData.email && (
+                <option value="user">Usuário</option>
+              )}
               <option value="admin">ADM</option>
             </select>
           ) : (
@@ -109,15 +120,19 @@ function UserListTrComponent({ userData }) {
       <th>
         <button className="btn btn-warning btn-sm" type="button" disabled>Salvar</button>
       </th>
-      <th>
-        <button className="btn btn-danger btn-sm" type="button">Deletar</button>
-      </th>
+      {userData.role !== 'admin' && (
+        <th>
+          <button className="btn btn-danger btn-sm" type="button" onClick={() => deleteUser(email)}>Deletar</button>
+        </th>
+      )}
     </tr>
   );
 }
 
 UserListTrComponent.propTypes = {
   data: PropTypes.arrayOf(string),
+  render: PropTypes.func,
+  setRender: PropTypes.func,
 }.isRequired;
 
 export default UserListTrComponent;
