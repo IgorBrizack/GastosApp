@@ -6,31 +6,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const _1 = __importDefault(require("."));
+const Gasto_1 = require("./Gasto");
 exports.User = _1.default.define('User', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
     },
     username: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     password: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     role: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     }
 }, {
     timestamps: false,
     tableName: 'users',
-    underscored: true,
+    underscored: true
+});
+exports.User.hasMany(Gasto_1.Gasto, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
 });

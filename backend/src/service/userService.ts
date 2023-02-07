@@ -22,13 +22,14 @@ export default class UserService {
     if (!userData) throw new ErrorWithStatus('User not found', 400)
   }
 
-  public registerService = async (user: IUser): Promise<undefined> => {
+  public registerService = async (user: IUser): Promise<void> => {
     const { username, email, passwordCryptography, role } = user
 
     const hasUser = await this.getByEmail(email)
 
     if (!hasUser) {
       await User.create({ username, email, password: passwordCryptography, role })
+      return
     }
 
     throw new ErrorWithStatus('User already registered!', 409)
@@ -46,5 +47,9 @@ export default class UserService {
     })
 
     return usersList
+  }
+
+  public delete = async (email: string): Promise<void> => {
+    await User.destroy({ where: { email } })
   }
 }

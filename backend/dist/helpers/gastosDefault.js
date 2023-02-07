@@ -6,31 +6,31 @@ const gastosDefault = (email) => {
     const defaultValues = [
         {
             type: gastoInterface_1.gastosType.alimentacao,
-            email: email,
+            email,
             value: 0,
             date: '0000/00/00'
         },
         {
             type: gastoInterface_1.gastosType.educacao,
-            email: email,
+            email,
             value: 0,
             date: '0000/00/00'
         },
         {
             type: gastoInterface_1.gastosType.investimento,
-            email: email,
+            email,
             value: 0,
             date: '0000/00/00'
         },
         {
             type: gastoInterface_1.gastosType.lazer,
-            email: email,
+            email,
             value: 0,
             date: '0000/00/00'
         },
         {
             type: gastoInterface_1.gastosType.servico,
-            email: email,
+            email,
             value: 0,
             date: '0000/00/00'
         }

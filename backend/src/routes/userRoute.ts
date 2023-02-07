@@ -11,5 +11,6 @@ const userController = new UserController()
 userRouter.post('/login', loginValidation, userController.login)
 userRouter.post('/register', registerValidation, userController.register)
 userRouter.get('/users', validateJWT, userController.users)
+userRouter.delete('/users/:email', validateJWT, userController.deleteUser)
 
 export default userRouter

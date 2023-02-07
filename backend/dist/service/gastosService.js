@@ -48,6 +48,16 @@ class GastosService {
         this.delete = (id) => __awaiter(this, void 0, void 0, function* () {
             yield Gasto_1.Gasto.destroy({ where: { id } });
         });
+        this.allGasto = () => __awaiter(this, void 0, void 0, function* () {
+            const QUERY = `SELECT type, SUM(value) as value FROM gastos_app_db.gastos
+    GROUP BY type`;
+            const [result] = yield index_1.default.query(QUERY);
+            return result;
+        });
+        this.allGastoWithDate = () => __awaiter(this, void 0, void 0, function* () {
+            const result = Gasto_1.Gasto.findAll();
+            return yield result;
+        });
     }
 }
 exports.default = GastosService;

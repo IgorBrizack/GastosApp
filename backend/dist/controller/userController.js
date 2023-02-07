@@ -41,7 +41,7 @@ const gastosService_1 = __importDefault(require("../service/gastosService"));
 const gastosDefault_1 = require("../helpers/gastosDefault");
 const saltRounds = 10;
 class UserController {
-    constructor(userService = new userService_1.default(), gastosService = new gastosService_1.default) {
+    constructor(userService = new userService_1.default(), gastosService = new gastosService_1.default()) {
         this.userService = userService;
         this.gastosService = gastosService;
         this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -54,9 +54,18 @@ class UserController {
             const passwordCryptography = yield bcrypt.hash(password, saltRounds);
             yield this.userService.registerService({ username, email, passwordCryptography, role });
             const defaultValues = (0, gastosDefault_1.gastosDefault)(email);
-            const values = defaultValues.map((el) => this.gastosService.insertGasto(el));
+            const values = defaultValues.map((el) => __awaiter(this, void 0, void 0, function* () { return yield this.gastosService.insertGasto(el); }));
             yield Promise.all(values);
-            return res.status(201).json({ message: "Created" });
+            res.status(201).json({ message: 'Created' });
+        });
+        this.users = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const usersList = yield this.userService.usersList();
+            res.status(200).json(usersList);
+        });
+        this.deleteUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { email } = req.params;
+            yield this.userService.delete(email);
+            res.status(200).json({ message: 'Deleted' });
         });
     }
 }

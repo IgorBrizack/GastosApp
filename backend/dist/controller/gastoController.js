@@ -19,7 +19,7 @@ class GastoController {
         this.insert = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { email, type, value, date } = req.body;
             yield this.gastoService.insertGasto({ email, type, value, date });
-            res.status(201).json({ message: 'inserido' });
+            return res.status(201).json({ message: 'inserido' });
         });
         this.getGastosUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { email } = req.params;
@@ -35,22 +35,30 @@ class GastoController {
             const { email } = req.params;
             try {
                 const gastos = yield this.gastoService.getGastoListFromUser(email);
-                return res.status(200).json(gastos);
+                res.status(200).json(gastos);
             }
             catch (error) {
-                return res.status(400).json({ message: 'Not found' });
+                res.status(400).json({ message: 'Not found' });
             }
         });
         this.updateGasto = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const { body } = req;
             yield this.gastoService.update(id, body);
-            return res.status(201).json({ message: 'Updated' });
+            res.status(201).json({ message: 'Updated' });
         });
         this.deleteGasto = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield this.gastoService.delete(id);
-            return res.status(201).json({ message: 'Deleted' });
+            res.status(201).json({ message: 'Deleted' });
+        });
+        this.getAllGastos = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const allGasto = yield this.gastoService.allGasto();
+            res.status(201).json(allGasto);
+        });
+        this.getAllGastosWithDate = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const allGastoWithDate = yield this.gastoService.allGastoWithDate();
+            res.status(201).json(allGastoWithDate);
         });
     }
 }

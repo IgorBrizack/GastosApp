@@ -8,8 +8,9 @@ require("dotenv/config");
 class GenerateToken {
     constructor() {
         this.generate = (userData) => {
+            var _a;
             const { email, role } = userData;
-            const secret = process.env.JWT_SECRET || 'meusegredoguardado';
+            const secret = (_a = process.env.JWT_SECRET) !== null && _a !== void 0 ? _a : 'meusegredoguardado';
             const jwtConfig = {
                 algorithm: 'HS256'
             };

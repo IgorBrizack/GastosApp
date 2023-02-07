@@ -17,7 +17,7 @@ export const loginSchema = Joi.object({
 })
 
 export const registerSchema = Joi.object({
-  email: Joi.string().required().email().messages({
+  email: Joi.string().required().email().min(12).max(20).messages({
     'string.empty': StringEmpty,
     'any.required': InvalidFields
   }),

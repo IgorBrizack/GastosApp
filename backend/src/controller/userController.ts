@@ -38,4 +38,12 @@ export default class UserController {
 
     res.status(200).json(usersList)
   }
+
+  public deleteUser = async (req: Request, res: Response): Promise <void> => {
+    const { email } = req.params
+
+    await this.userService.delete(email)
+
+    res.status(200).json({ message: 'Deleted' })
+  }
 }
