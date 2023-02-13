@@ -67,6 +67,12 @@ class UserController {
             yield this.userService.delete(email);
             res.status(200).json({ message: 'Deleted' });
         });
+        this.updateUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const { username, email, role } = req.body;
+            yield this.userService.update(Number(id), { username, email, role });
+            res.status(201).json({ message: 'Updated' });
+        });
     }
 }
 exports.default = UserController;

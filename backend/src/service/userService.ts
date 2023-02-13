@@ -55,6 +55,8 @@ export default class UserService {
   }
 
   public update = async (id: number, body: userUpdateInterface): Promise<void> => {
-    await User.update(body, { where: id })
+    const { username, role, email } = body
+    const result = await User.update({ username, role, email }, { where: { id } })
+    console.log(result)
   }
 }

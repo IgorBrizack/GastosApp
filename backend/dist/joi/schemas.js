@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.gastoUpdateSchema = exports.gastoSchema = exports.registerSchema = exports.loginSchema = void 0;
+exports.userUpdateSchema = exports.gastoUpdateSchema = exports.gastoSchema = exports.registerSchema = exports.loginSchema = void 0;
 /* eslint-disable @typescript-eslint/no-var-requires */
 const Joi = require('joi')
     .extend(require('@joi/date'));
@@ -56,4 +56,15 @@ exports.gastoUpdateSchema = Joi.object({
         'any.required': InvalidFields
     }),
     date: Joi.date().utc().format(['YYYY/MM/DD', 'DD/MM/YYYY'])
+});
+exports.userUpdateSchema = Joi.object({
+    email: Joi.string().required().email().min(12).max(20).messages({
+        'string.empty': StringEmpty,
+        'any.required': InvalidFields
+    }),
+    username: Joi.string().required().min(12).messages({
+        'string.empty': StringEmpty,
+        'any.required': InvalidFields
+    }),
+    role: Joi.string().required()
 });

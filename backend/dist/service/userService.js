@@ -78,6 +78,11 @@ class UserService {
         this.delete = (email) => __awaiter(this, void 0, void 0, function* () {
             yield User_1.User.destroy({ where: { email } });
         });
+        this.update = (id, body) => __awaiter(this, void 0, void 0, function* () {
+            const { username, role, email } = body;
+            const result = yield User_1.User.update({ username, role, email }, { where: { id } });
+            console.log(result);
+        });
     }
 }
 exports.default = UserService;

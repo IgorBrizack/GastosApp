@@ -59,3 +59,15 @@ export const gastoUpdateSchema = Joi.object({
   }),
   date: Joi.date().utc().format(['YYYY/MM/DD', 'DD/MM/YYYY'])
 })
+
+export const userUpdateSchema = Joi.object({
+  email: Joi.string().required().email().min(12).max(20).messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields
+  }),
+  username: Joi.string().required().min(12).messages({
+    'string.empty': StringEmpty,
+    'any.required': InvalidFields
+  }),
+  role: Joi.string().required()
+})
