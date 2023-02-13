@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize'
 import db from '.'
-// import { User } from './User'
 
 export const Gasto = db.define('Gasto', {
   id: {
@@ -30,7 +29,3 @@ export const Gasto = db.define('Gasto', {
   tableName: 'gastos',
   underscored: true
 })
-
-// Gasto.belongsTo(User, {
-//   onDelete: 'CASCADE'
-// })

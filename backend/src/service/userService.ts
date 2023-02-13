@@ -4,6 +4,7 @@ import IUser from '../interfaces/IUser'
 import * as bcrypt from 'bcryptjs'
 import GenerateToken from '../token/generateToken'
 import loginReturnInterface from '../interfaces/loginReturnInterface'
+import userUpdateInterface from '../interfaces/updateUserInterface'
 
 export default class UserService {
   constructor (private readonly generateToken = new GenerateToken()) {}
@@ -51,5 +52,9 @@ export default class UserService {
 
   public delete = async (email: string): Promise<void> => {
     await User.destroy({ where: { email } })
+  }
+
+  public update = async (id: number, body: userUpdateInterface): Promise<void> => {
+    await User.update(body, { where: id })
   }
 }

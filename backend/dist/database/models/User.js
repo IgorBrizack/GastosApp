@@ -39,3 +39,6 @@ exports.User.hasMany(Gasto_1.Gasto, {
     foreignKey: 'userId',
     onDelete: 'CASCADE'
 });
+Gasto_1.Gasto.hasOne(exports.User, {
+    foreignKey: 'id'
+});

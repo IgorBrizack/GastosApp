@@ -46,4 +46,14 @@ export default class UserController {
 
     res.status(200).json({ message: 'Deleted' })
   }
+
+  public updateUser = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.params
+
+    const { username, email, role } = req.body
+
+    await this.userService.update(Number(id), { username, email, role })
+
+    res.status(201).json({ message: 'Updated' })
+  }
 }

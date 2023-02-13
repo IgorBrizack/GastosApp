@@ -35,3 +35,7 @@ User.hasMany(Gasto, {
   foreignKey: 'userId',
   onDelete: 'CASCADE'
 })
+
+Gasto.hasOne(User, {
+  foreignKey: 'id'
+})

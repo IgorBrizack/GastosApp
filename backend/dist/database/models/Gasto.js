@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Gasto = void 0;
 const sequelize_1 = require("sequelize");
 const _1 = __importDefault(require("."));
-// import { User } from './User'
 exports.Gasto = _1.default.define('Gasto', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -35,6 +34,3 @@ exports.Gasto = _1.default.define('Gasto', {
     tableName: 'gastos',
     underscored: true
 });
-// Gasto.belongsTo(User, {
-//   onDelete: 'CASCADE'
-// })
