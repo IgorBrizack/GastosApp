@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes, { string } from 'prop-types';
 import '../style.css';
-import { deleteData } from '../services/request';
+import { deleteData, putData } from '../services/request';
 
 const userStorage = JSON.parse(localStorage.getItem('user'));
 
 function UserListTrComponent({ userData, render, setRender }) {
-  const [userName, setUserName] = useState();
+  const [username, setUserName] = useState();
   const [id, setUserId] = useState();
   const [email, setUserEmail] = useState();
   const [role, setUserRole] = useState();
@@ -15,6 +15,14 @@ function UserListTrComponent({ userData, render, setRender }) {
   const roleHelper = {
     admin: 'ADM',
     user: 'Usuário',
+    ADM: 'admin',
+    Usuário: 'user',
+  };
+
+  const updateUser = async () => {
+    console.log(username, email, role);
+    await putData(`/users/update/${id}`, { username, email, role: roleHelper[role] });
+    setRender(!render);
   };
 
   const deleteUser = async (userEmail) => {
@@ -27,7 +35,7 @@ function UserListTrComponent({ userData, render, setRender }) {
     setUserId(userData.id);
     setUserEmail(userData.email);
     setUserRole(roleHelper[userData.role]);
-  }, [userName, id, email, role]);
+  }, []);
 
   return (
     <tr>
@@ -55,7 +63,7 @@ function UserListTrComponent({ userData, render, setRender }) {
               style={{ margin: 'auto', textAlign: 'center', width: '120px' }}
 
             >
-              {userName}
+              {username}
 
             </p>
           )}
@@ -118,9 +126,9 @@ function UserListTrComponent({ userData, render, setRender }) {
         <button className="btn btn-primary btn-sm" type="button" onClick={() => setEditar(!editar)}>Editar</button>
       </th>
       <th>
-        <button className="btn btn-warning btn-sm" type="button" disabled>Salvar</button>
+        <button className="btn btn-warning btn-sm" type="button" onClick={() => updateUser()} disabled={!editar}>Salvar</button>
       </th>
-      {userData.role !== 'admin' && (
+      {userStorage.email !== userData.email && (
         <th>
           <button className="btn btn-danger btn-sm" type="button" onClick={() => deleteUser(email)}>Deletar</button>
         </th>
