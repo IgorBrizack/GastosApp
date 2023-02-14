@@ -80,8 +80,7 @@ class UserService {
         });
         this.update = (id, body) => __awaiter(this, void 0, void 0, function* () {
             const { username, role, email } = body;
-            const result = yield User_1.User.update({ username, role, email }, { where: { id } });
-            console.log(result);
+            yield User_1.User.update({ username, role, email }, { where: { id } });
         });
     }
 }
