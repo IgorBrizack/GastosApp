@@ -9,8 +9,6 @@ import PorcentagensComponent from '../components/Porcentagens';
 import GastosList from '../components/GastosList';
 import UserContext from '../contexts/UserContext';
 import loading from '../images/loading.gif';
-import BarChart from '../components/BarChart';
-import UserListTable from '../components/UserListTable';
 
 ChartJS.register(...registerables);
 
@@ -18,13 +16,8 @@ function MainUserScreen() {
   const {
     hasUpdated,
     setHasUpdated,
-    adminPorcentagens,
-    setAdminPorcentagens,
-    gastoMensal,
-    setGastoMensal,
-    setUsersList,
-    usersList,
   } = useContext(UserContext);
+
   const [selectedType, setSelectedType] = useState('alimentacao');
   const [date, setDate] = useState();
   const [valueGasto, setValueGasto] = useState();
@@ -60,12 +53,6 @@ function MainUserScreen() {
     setAlimentacaoPercentage(alimentacaoPercentual);
     setServicoPercentage(servicoPercentual);
     setHasPercentages(true);
-  };
-
-  const isAdmin = () => {
-    const { role } = JSON.parse(localStorage.getItem('user'));
-    if (role === 'admin') return true;
-    return false;
   };
 
   const formatedData = (data) => {
@@ -104,15 +91,6 @@ function MainUserScreen() {
   const getAllData = async () => {
     const { email } = JSON.parse(localStorage.getItem('user'));
 
-    if (isAdmin()) {
-      try {
-        const data = await getData('/gasto');
-        return formatedData(data);
-      } catch (error) {
-        return error.message;
-      }
-    }
-
     try {
       const data = await getData(`/gasto/${email}`);
       return formatedData(data);
@@ -138,19 +116,13 @@ function MainUserScreen() {
   };
 
   useEffect(() => {
-    setGastoMensal(false);
-    setAdminPorcentagens(true);
-    setHasPercentages(false);
-    setUsersList(false);
     getAllData();
-    isAdmin();
   }, [hasUpdated]);
 
   return (
     <>
       <Header />
       <div id="user-screen-main-container">
-        {adminPorcentagens && (
         <div className="pie-and-percentage-main-container">
           <div
             className="pie-chart-from-users"
@@ -169,8 +141,6 @@ function MainUserScreen() {
             />
           ) : <img alt="loading" src={loading} /> }
         </div>
-        )}
-        {!isAdmin() && (
         <div className="inserir-gastos-main-container">
           <h2>Inserir novo gasto</h2>
           <label htmlFor="dinheiro">
@@ -216,11 +186,8 @@ function MainUserScreen() {
             Inserir
           </button>
         </div>
-        )}
       </div>
-      {gastoMensal && <BarChart />}
-      {usersList && <UserListTable />}
-      {!isAdmin() && <GastosList /> }
+      <GastosList />
     </>
   );
 }

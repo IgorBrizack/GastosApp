@@ -20,7 +20,6 @@ function UserListTrComponent({ userData, render, setRender }) {
   };
 
   const updateUser = async () => {
-    console.log(username, email, role);
     await putData(`/users/update/${id}`, { username, email, role: roleHelper[role] });
     setRender(!render);
   };
@@ -35,7 +34,7 @@ function UserListTrComponent({ userData, render, setRender }) {
     setUserId(userData.id);
     setUserEmail(userData.email);
     setUserRole(roleHelper[userData.role]);
-  }, []);
+  }, [username, id, email, role]);
 
   return (
     <tr>
