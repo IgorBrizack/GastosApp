@@ -58,7 +58,8 @@ class UserService {
             const { username, email, passwordCryptography, role } = user;
             const hasUser = yield this.getByEmail(email);
             if (!hasUser) {
-                return yield User_1.User.create({ username, email, password: passwordCryptography, role });
+                yield User_1.User.create({ username, email, password: passwordCryptography, role });
+                return;
             }
             throw new ErrorWithStatus_1.default('User already registered!', 409);
         });
@@ -67,6 +68,19 @@ class UserService {
             if (userByEmail)
                 return true;
             return false;
+        });
+        this.usersList = () => __awaiter(this, void 0, void 0, function* () {
+            const usersList = yield User_1.User.findAll({
+                attributes: { exclude: ['password'] }
+            });
+            return usersList;
+        });
+        this.delete = (email) => __awaiter(this, void 0, void 0, function* () {
+            yield User_1.User.destroy({ where: { email } });
+        });
+        this.update = (id, body) => __awaiter(this, void 0, void 0, function* () {
+            const { username, role, email } = body;
+            yield User_1.User.update({ username, role, email }, { where: { id } });
         });
     }
 }

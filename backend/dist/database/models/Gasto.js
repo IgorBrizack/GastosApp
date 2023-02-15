@@ -11,19 +11,19 @@ exports.Gasto = _1.default.define('Gasto', {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
     },
     userId: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     type: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     value: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     gastoDate: {
         type: sequelize_1.DataTypes.STRING,
@@ -32,5 +32,5 @@ exports.Gasto = _1.default.define('Gasto', {
 }, {
     timestamps: false,
     tableName: 'gastos',
-    underscored: true,
+    underscored: true
 });

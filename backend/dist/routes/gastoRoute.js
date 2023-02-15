@@ -11,6 +11,8 @@ const validateGastoUpdateMiddleware_1 = require("../middleware/validateGastoUpda
 const gastoRouter = (0, express_1.Router)();
 const gastoController = new gastoController_1.default();
 gastoRouter.post('/gasto', validateJWT_1.validateJWT, validateGastoMiddleware_1.gastoValidation, gastoController.insert);
+gastoRouter.get('/gasto', validateJWT_1.validateJWT, gastoController.getAllGastos);
+gastoRouter.get('/gasto/dates', validateJWT_1.validateJWT, gastoController.getAllGastosWithDate);
 gastoRouter.get('/gasto/:email', validateJWT_1.validateJWT, gastoController.getGastosUser);
 gastoRouter.get('/gasto/:email/list', validateJWT_1.validateJWT, gastoController.getGastosUserList);
 gastoRouter.put('/gasto/:id', validateJWT_1.validateJWT, validateGastoUpdateMiddleware_1.gastoUpdateValidation, gastoController.updateGasto);

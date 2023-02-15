@@ -1,31 +1,41 @@
 import { DataTypes } from 'sequelize'
-import db from '.';
+import db from '.'
+import { Gasto } from './Gasto'
 
 export const User = db.define('User', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
-    primaryKey: true,
+    primaryKey: true
   },
   username: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   role: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   }
 }, {
   timestamps: false,
   tableName: 'users',
-  underscored: true,
-});
+  underscored: true
+})
+
+User.hasMany(Gasto, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE'
+})
+
+Gasto.hasOne(User, {
+  foreignKey: 'id'
+})

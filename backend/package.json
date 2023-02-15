@@ -14,7 +14,7 @@
     "@types/jsonwebtoken": "^9.0.0",
     "@types/node": "^18.11.18",
     "dotenv": "^16.0.3",
-    "eslint": "^8.31.0",
+    "eslint-config-standard-with-typescript": "^31.0.0",
     "nodemon": "^2.0.20",
     "sequelize-cli": "^6.5.2",
     "typescript": "^4.9.4"

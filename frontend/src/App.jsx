@@ -4,6 +4,7 @@ import UserProvider from './contexts/UserProvider';
 import Login from './pages/Login';
 import MainUserScreen from './pages/MainUserScreen';
 import RegisterScreen from './pages/RegisterScreen';
+import MainAdminScreen from './pages/MainAdminScreen';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/" element={<Navigate to="/login" />} />
         <Route path="/user" element={<MainUserScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
+        <Route path="/admin" element={<MainAdminScreen />} />
       </Routes>
     </UserProvider>
   );

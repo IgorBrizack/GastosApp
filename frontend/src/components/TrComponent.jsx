@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import PropTypes, { string } from 'prop-types';
-import '../index.css';
 import { deleteData, putData } from '../services/request';
 import UserContext from '../contexts/UserContext';
+import '../style.css';
+import '../bootstrap.min.css';
 
 function TrComponent({ element }) {
   const { hasUpdated, setHasUpdated } = useContext(UserContext);
@@ -52,20 +53,24 @@ function TrComponent({ element }) {
   return (
     <tr>
       <th>
-        <label htmlFor={element.id}>
+        <label style={{ display: 'flex' }} htmlFor={element.id}>
+          R$
           {editar
             ? (
-              <input
-                type="number"
-                step="0.01"
-                name="quantity"
-                min="0.01"
-                id={element.id}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-              />
+              <div className="input-group input-group-sm">
+                <input
+                  className="gastos-list-inputs form-control"
+                  type="number"
+                  step="0.01"
+                  name="quantity"
+                  min="0.01"
+                  id={element.id}
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                />
+              </div>
             )
-            : <p>{element.value}</p>}
+            : <p className="gastos-list-inputs">{element.value.replace('.', ',')}</p>}
         </label>
       </th>
       <th>
@@ -73,6 +78,7 @@ function TrComponent({ element }) {
           {editar
             ? (
               <select
+                className="gastos-list-inputs form-select form-select-sm"
                 onClick={(e) => setType(e.target.value)}
                 name="select"
               >
@@ -83,27 +89,36 @@ function TrComponent({ element }) {
                 <option value="educacao">Educação</option>
               </select>
             )
-            : <p>{labels[element.type]}</p>}
+            : <p className="gastos-list-inputs">{labels[element.type]}</p>}
         </label>
       </th>
       <th>
         {editar
           ? (
-            <input
-              onChange={(e) => setDate(e.target.value)}
-              value={date}
-              type="date"
-              id="insert-date-input"
-              name="gasto-date"
-              min="2000-01-01"
-              max="2030-01-01"
-            />
+            <div className="input-group input-group-sm">
+              <input
+                className="gastos-list-inputs form-control "
+                onChange={(e) => setDate(e.target.value)}
+                value={date}
+                type="date"
+                id="insert-date-input"
+                name="gasto-date"
+                min="2000-01-01"
+                max="2030-01-01"
+              />
+            </div>
           )
-          : <p>{element.gastoDate}</p>}
+          : <p className="gastos-list-inputs">{element.gastoDate}</p>}
       </th>
-      <th><button type="button" onClick={() => setEditar(!editar)}>Editar</button></th>
-      <th><button type="button" disabled={!editar} onClick={() => upadteGasto()}>Salvar</button></th>
-      <th><button type="button" onClick={() => deleteGasto()}>Deletar</button></th>
+      <th>
+        <button className="btn btn-primary btn-sm" type="button" onClick={() => setEditar(!editar)}>Editar</button>
+      </th>
+      <th>
+        <button className="btn btn-warning btn-sm" type="button" disabled={!editar} onClick={() => upadteGasto()}>Salvar</button>
+      </th>
+      <th>
+        <button className="btn btn-danger btn-sm" type="button" onClick={() => deleteGasto()}>Deletar</button>
+      </th>
     </tr>
   );
 }

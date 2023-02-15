@@ -15,6 +15,7 @@ function LoginBtn() {
       const result = await postData('/login', body);
       localStorage.setItem('user', JSON.stringify(result));
       if (result.role === 'user') navigate('/user');
+      if (result.role === 'admin') navigate('/admin');
       setHasUser(false);
     } catch (error) {
       setHasUser(true);

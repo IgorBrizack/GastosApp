@@ -5,12 +5,12 @@ function GenericInput({
   type, selector, fieldName, placeholder, setter,
 }) {
   return (
-    <label htmlFor={selector}>
+    <label className="form-label" htmlFor={selector}>
       { fieldName}
       <input
         type={type}
         id={selector}
-        className={selector}
+        className="form-control"
         placeholder={placeholder}
         onChange={(e) => setter(e.target.value)}
       />
