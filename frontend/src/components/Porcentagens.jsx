@@ -42,7 +42,7 @@ function PorcentagensComponent() {
   };
 
   useEffect(() => {
-    getPercentages(userGastoData);
+    if (userGastoData.length > 0) getPercentages(userGastoData);
   }, [userGastoData]);
 
   return (

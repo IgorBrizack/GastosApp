@@ -4,11 +4,11 @@ import '../bootstrap.min.css';
 import '../style.css';
 import Header from '../components/Header';
 import { postData, getData } from '../services/request';
-// import PorcentagensComponent from '../components/Porcentagens';
 import GastosList from '../components/GastosList';
 import UserContext from '../contexts/UserContext';
 import PieChart from '../components/PieChart';
 import PorcentagensComponent from '../components/Porcentagens';
+import Footer from '../components/Footer';
 
 ChartJS.register(...registerables);
 
@@ -22,52 +22,9 @@ function MainUserScreen() {
   const [selectedType, setSelectedType] = useState('alimentacao');
   const [date, setDate] = useState();
   const [valueGasto, setValueGasto] = useState();
-  // const [allChartData, setChartData] = useState();
-  // const [hasPercentages, setHasPercentages] = useState(false);
-  // const [eduPercentage, setEduPercentage] = useState();
-  // const [lazerPercentage, setLazerPercentage] = useState();
-  // const [investPercentage, setInvestPercentage] = useState();
-  // const [alimentacaoPercentage, setAlimentacaoPercentage] = useState();
-  // const [servicoPercentage, setServicoPercentage] = useState();
-
-  // const getPercentages = (data) => {
-  //   const total = data.reduce((acc, el) => {
-  //     const sum = acc + el.value;
-  //     return sum;
-  //   }, 0);
-
-  //   const [lazerValue] = data.filter((el) => el.type === 'lazer');
-  //   const [educacaoValue] = data.filter((el) => el.type === 'educacao');
-  //   const [investimentoValue] = data.filter((el) => el.type === 'investimento');
-  //   const [servicoValue] = data.filter((el) => el.type === 'servico');
-  //   const [alimentacaoValue] = data.filter((el) => el.type === 'alimentacao');
-
-  //   const lazerPercentual = ((Number(lazerValue.value) * 100) / total);
-  //   const educacaoPercentual = ((Number(educacaoValue.value) * 100) / total);
-  //   const investimentoPercentual = ((Number(investimentoValue.value) * 100) / total);
-  //   const servicoPercentual = ((Number(servicoValue.value) * 100) / total);
-  //   const alimentacaoPercentual = ((Number(alimentacaoValue.value) * 100) / total);
-
-  //   setEduPercentage(educacaoPercentual);
-  //   setLazerPercentage(lazerPercentual);
-  //   setInvestPercentage(investimentoPercentual);
-  //   setAlimentacaoPercentage(alimentacaoPercentual);
-  //   setServicoPercentage(servicoPercentual);
-  //   setHasPercentages(true);
-  // };
 
   const getAllData = async () => {
-    const { role } = JSON.parse(localStorage.getItem('user'));
     const { email } = JSON.parse(localStorage.getItem('user'));
-
-    if (role === 'admin') {
-      try {
-        const data = await getData('/gasto');
-        return setUserGastoData(data);
-      } catch (error) {
-        return error.message;
-      }
-    }
 
     try {
       const data = await getData(`/gasto/${email}`);
@@ -156,6 +113,7 @@ function MainUserScreen() {
         </div>
       </div>
       <GastosList />
+      <Footer />
     </>
   );
 }

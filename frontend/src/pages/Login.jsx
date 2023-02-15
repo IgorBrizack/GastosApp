@@ -29,25 +29,30 @@ function Login() {
   return (
     <>
       <h1>Bem vindo(a) ao gastosApp</h1>
-      <form>
-        <EmailInput setEmail={setEmail} />
-        <GenericInput
-          type="password"
-          selector="password"
-          fieldName="Senha"
-          placeholder="Min. 6 dígitos"
-          setter={setPassword}
-        />
-        <LoginBtn />
-      </form>
-      { hasUser && <p> usuário inválido ou senha inválido</p> }
-      <button
-        type="button"
-        onClick={() => navigate('/register')}
-      >
-        Resgistrar
+      <div>
+        <form>
+          <div className="mb-3">
+            <EmailInput setEmail={setEmail} />
+            <GenericInput
+              type="password"
+              selector="password"
+              fieldName="Senha"
+              placeholder="Min. 6 dígitos"
+              setter={setPassword}
+            />
+          </div>
+          <LoginBtn />
+        </form>
+        { hasUser && <p> usuário inválido ou senha inválido</p> }
+        <button
+          type="button"
+          onClick={() => navigate('/register')}
+        >
+          Resgistrar
 
-      </button>
+        </button>
+
+      </div>
     </>
   );
 }

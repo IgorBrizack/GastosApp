@@ -10,6 +10,8 @@ function Header() {
     setAdminPorcentagens,
     setGastoMensal,
     setUsersList,
+    setHasUpdated,
+    hasUpdated,
   } = useContext(UserContext);
   const [userName, setUserName] = useState('');
 
@@ -17,18 +19,21 @@ function Header() {
     setGastoMensal(false);
     setUsersList(false);
     setAdminPorcentagens(true);
+    setHasUpdated(!hasUpdated);
   };
 
   const onlyGastoMensal = () => {
     setAdminPorcentagens(false);
     setUsersList(false);
     setGastoMensal(true);
+    setHasUpdated(!hasUpdated);
   };
 
   const onlyUsersList = () => {
     setAdminPorcentagens(false);
     setGastoMensal(false);
     setUsersList(true);
+    setHasUpdated(!hasUpdated);
   };
 
   const isAdmin = () => {

@@ -2,6 +2,15 @@ body {
   background-color: rgb(206, 205, 205);
 }
 
+footer {
+  border: 1px solid black;
+  margin: auto;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  background-color: white;
+  }
+
 .pie-chart-from-users {
   width: 300px;
 }
@@ -31,7 +40,7 @@ body {
 }
 
 .inserir-gastos-main-container {
-  height: 350px;
+  height: 320px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -60,7 +69,6 @@ thead {
   margin-bottom: 10px;
 }
 
-
 .user-table-main-container {
   width: 770px;
   margin: auto;
@@ -68,10 +76,10 @@ thead {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
-  height: 300px;
+  height: 250px;
 }
 tbody {
-    height: 300px;       /* Just for the demo          */
+    height: 180px;       /* Just for the demo          */
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
 }
