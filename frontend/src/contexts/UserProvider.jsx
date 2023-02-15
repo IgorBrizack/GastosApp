@@ -14,10 +14,13 @@ function UserProvider({ children }) {
   const [adminPorcentagens, setAdminPorcentagens] = useState(true);
   const [gastoMensal, setGastoMensal] = useState(false);
   const [usersList, setUsersList] = useState(false);
+  const [userGastoData, setUserGastoData] = useState([]);
 
   const contextUser = useMemo(() => ({
     email,
     setEmail,
+    userGastoData,
+    setUserGastoData,
     password,
     setPassword,
     hasUser,
@@ -39,6 +42,7 @@ function UserProvider({ children }) {
     usersList,
     setUsersList,
   }), [
+    userGastoData,
     email,
     password,
     hasUser,

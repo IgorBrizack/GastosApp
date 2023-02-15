@@ -3,17 +3,18 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import '../bootstrap.min.css';
 import '../style.css';
 import Header from '../components/Header';
-import { postData } from '../services/request';
+import { postData, getData } from '../services/request';
 // import PorcentagensComponent from '../components/Porcentagens';
 import GastosList from '../components/GastosList';
 import UserContext from '../contexts/UserContext';
-// import loading from '../images/loading.gif';
 import PieChart from '../components/PieChart';
+import PorcentagensComponent from '../components/Porcentagens';
 
 ChartJS.register(...registerables);
 
 function MainUserScreen() {
   const {
+    setUserGastoData,
     hasUpdated,
     setHasUpdated,
   } = useContext(UserContext);
@@ -55,6 +56,27 @@ function MainUserScreen() {
   //   setHasPercentages(true);
   // };
 
+  const getAllData = async () => {
+    const { role } = JSON.parse(localStorage.getItem('user'));
+    const { email } = JSON.parse(localStorage.getItem('user'));
+
+    if (role === 'admin') {
+      try {
+        const data = await getData('/gasto');
+        return setUserGastoData(data);
+      } catch (error) {
+        return error.message;
+      }
+    }
+
+    try {
+      const data = await getData(`/gasto/${email}`);
+      return setUserGastoData(data);
+    } catch (error) {
+      return error.message;
+    }
+  };
+
   const insertGasto = async () => {
     const { email } = JSON.parse(localStorage.getItem('user'));
     try {
@@ -72,6 +94,7 @@ function MainUserScreen() {
   };
 
   useEffect(() => {
+    getAllData();
   }, [hasUpdated]);
 
   return (
@@ -84,15 +107,7 @@ function MainUserScreen() {
           >
             <PieChart />
           </div>
-          {/* {hasPercentages ? (
-            <PorcentagensComponent
-              lazer={lazerPercentage}
-              servico={servicoPercentage}
-              educacao={eduPercentage}
-              investimento={investPercentage}
-              alimentacao={alimentacaoPercentage}
-            />
-          ) : <img alt="loading" src={loading} /> } */}
+          <PorcentagensComponent />
         </div>
         <div className="inserir-gastos-main-container">
           <h2>Inserir novo gasto</h2>

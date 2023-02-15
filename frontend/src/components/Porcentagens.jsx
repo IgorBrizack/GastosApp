@@ -1,37 +1,73 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
 import '../bootstrap.min.css';
+import UserContext from '../contexts/UserContext';
+import loading from '../images/loading.gif';
 
-function PorcentagensComponent({
-  lazer, investimento, educacao, servico, alimentacao,
-}) {
+function PorcentagensComponent() {
+  const {
+    userGastoData,
+  } = useContext(UserContext);
+
+  const [hasPercentages, setHasPercentages] = useState(false);
+  const [eduPercentage, setEduPercentage] = useState();
+  const [lazerPercentage, setLazerPercentage] = useState();
+  const [investPercentage, setInvestPercentage] = useState();
+  const [alimentacaoPercentage, setAlimentacaoPercentage] = useState();
+  const [servicoPercentage, setServicoPercentage] = useState();
+
+  const getPercentages = (data) => {
+    const total = data.reduce((acc, el) => {
+      const sum = acc + el.value;
+      return sum;
+    }, 0);
+
+    const [lazerValue] = data.filter((el) => el.type === 'lazer');
+    const [educacaoValue] = data.filter((el) => el.type === 'educacao');
+    const [investimentoValue] = data.filter((el) => el.type === 'investimento');
+    const [servicoValue] = data.filter((el) => el.type === 'servico');
+    const [alimentacaoValue] = data.filter((el) => el.type === 'alimentacao');
+
+    const lazerPercentual = ((Number(lazerValue.value) * 100) / total);
+    const educacaoPercentual = ((Number(educacaoValue.value) * 100) / total);
+    const investimentoPercentual = ((Number(investimentoValue.value) * 100) / total);
+    const servicoPercentual = ((Number(servicoValue.value) * 100) / total);
+    const alimentacaoPercentual = ((Number(alimentacaoValue.value) * 100) / total);
+
+    setEduPercentage(educacaoPercentual);
+    setLazerPercentage(lazerPercentual);
+    setInvestPercentage(investimentoPercentual);
+    setAlimentacaoPercentage(alimentacaoPercentual);
+    setServicoPercentage(servicoPercentual);
+    setHasPercentages(true);
+  };
+
+  useEffect(() => {
+    getPercentages(userGastoData);
+  }, [userGastoData]);
+
   return (
     <div>
-      <p className="font-monospace">
-        {`Lazer: ${lazer ? Number(lazer).toFixed(2) : 0}%`}
-      </p>
-      <p className="font-monospace">
-        {`Educação: ${educacao ? Number(educacao).toFixed(2) : 0}%`}
-      </p>
-      <p className="font-monospace">
-        {`Investimento: ${investimento ? Number(investimento).toFixed(2) : 0}%`}
-      </p>
-      <p className="font-monospace">
-        {`Alimentação: ${alimentacao ? Number(alimentacao).toFixed(2) : 0}%`}
-      </p>
-      <p className="font-monospace">
-        {`Serviço: ${servico ? Number(servico).toFixed(2) : 0}%`}
-      </p>
+      { hasPercentages ? (
+        <div>
+          <p className="font-monospace">
+            {`Lazer: ${lazerPercentage ? Number(lazerPercentage).toFixed(2) : 0}%`}
+          </p>
+          <p className="font-monospace">
+            {`Educação: ${eduPercentage ? Number(eduPercentage).toFixed(2) : 0}%`}
+          </p>
+          <p className="font-monospace">
+            {`Investimento: ${investPercentage ? Number(investPercentage).toFixed(2) : 0}%`}
+          </p>
+          <p className="font-monospace">
+            {`Alimentação: ${alimentacaoPercentage ? Number(alimentacaoPercentage).toFixed(2) : 0}%`}
+          </p>
+          <p className="font-monospace">
+            {`Serviço: ${servicoPercentage ? Number(servicoPercentage).toFixed(2) : 0}%`}
+          </p>
+        </div>
+      ) : (<img alt="loading" src={loading} />)}
     </div>
   );
 }
 
 export default PorcentagensComponent;
-
-PorcentagensComponent.propTypes = {
-  lazer: PropTypes.number,
-  investimento: PropTypes.number,
-  educacao: PropTypes.number,
-  servico: PropTypes.number,
-  alimentacao: PropTypes.number,
-}.isRequired;

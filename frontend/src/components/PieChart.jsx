@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { getData } from '../services/request';
+import loading from '../images/loading.gif';
+import UserContext from '../contexts/UserContext';
 
 ChartJS.register(...registerables);
 
 function PieChart() {
+  const {
+    userGastoData,
+  } = useContext(UserContext);
   const [chartData, setChartData] = useState(false);
 
   const formatedData = (data) => {
@@ -40,20 +44,9 @@ function PieChart() {
     });
   };
 
-  const getAllData = async () => {
-    const { email } = JSON.parse(localStorage.getItem('user'));
-
-    try {
-      const data = await getData(`/gasto/${email}`);
-      return formatedData(data);
-    } catch (error) {
-      return error.message;
-    }
-  };
-
   useEffect(() => {
-    getAllData();
-  }, []);
+    formatedData(userGastoData);
+  }, [userGastoData]);
 
   return (
     <div style={
@@ -63,7 +56,7 @@ function PieChart() {
     }
     >
       {
-      chartData && <Pie data={chartData} />
+      chartData ? (<Pie data={chartData} />) : (<img alt="loading" src={loading} />)
     }
     </div>
   );
