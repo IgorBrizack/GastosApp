@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Chart as ChartJS, registerables } from 'chart.js';
-import PieChart from '../components/PieChart';
 import '../bootstrap.min.css';
 import '../style.css';
 import Header from '../components/Header';
-import { getData, postData } from '../services/request';
-import PorcentagensComponent from '../components/Porcentagens';
+import { postData } from '../services/request';
+// import PorcentagensComponent from '../components/Porcentagens';
 import GastosList from '../components/GastosList';
 import UserContext from '../contexts/UserContext';
-import loading from '../images/loading.gif';
+// import loading from '../images/loading.gif';
+import PieChart from '../components/PieChart';
 
 ChartJS.register(...registerables);
 
@@ -21,83 +21,39 @@ function MainUserScreen() {
   const [selectedType, setSelectedType] = useState('alimentacao');
   const [date, setDate] = useState();
   const [valueGasto, setValueGasto] = useState();
-  const [allChartData, setChartData] = useState();
-  const [hasPercentages, setHasPercentages] = useState(false);
-  const [eduPercentage, setEduPercentage] = useState();
-  const [lazerPercentage, setLazerPercentage] = useState();
-  const [investPercentage, setInvestPercentage] = useState();
-  const [alimentacaoPercentage, setAlimentacaoPercentage] = useState();
-  const [servicoPercentage, setServicoPercentage] = useState();
+  // const [allChartData, setChartData] = useState();
+  // const [hasPercentages, setHasPercentages] = useState(false);
+  // const [eduPercentage, setEduPercentage] = useState();
+  // const [lazerPercentage, setLazerPercentage] = useState();
+  // const [investPercentage, setInvestPercentage] = useState();
+  // const [alimentacaoPercentage, setAlimentacaoPercentage] = useState();
+  // const [servicoPercentage, setServicoPercentage] = useState();
 
-  const getPercentages = (data) => {
-    const total = data.reduce((acc, el) => {
-      const sum = acc + el.value;
-      return sum;
-    }, 0);
+  // const getPercentages = (data) => {
+  //   const total = data.reduce((acc, el) => {
+  //     const sum = acc + el.value;
+  //     return sum;
+  //   }, 0);
 
-    const [lazerValue] = data.filter((el) => el.type === 'lazer');
-    const [educacaoValue] = data.filter((el) => el.type === 'educacao');
-    const [investimentoValue] = data.filter((el) => el.type === 'investimento');
-    const [servicoValue] = data.filter((el) => el.type === 'servico');
-    const [alimentacaoValue] = data.filter((el) => el.type === 'alimentacao');
+  //   const [lazerValue] = data.filter((el) => el.type === 'lazer');
+  //   const [educacaoValue] = data.filter((el) => el.type === 'educacao');
+  //   const [investimentoValue] = data.filter((el) => el.type === 'investimento');
+  //   const [servicoValue] = data.filter((el) => el.type === 'servico');
+  //   const [alimentacaoValue] = data.filter((el) => el.type === 'alimentacao');
 
-    const lazerPercentual = ((Number(lazerValue.value) * 100) / total);
-    const educacaoPercentual = ((Number(educacaoValue.value) * 100) / total);
-    const investimentoPercentual = ((Number(investimentoValue.value) * 100) / total);
-    const servicoPercentual = ((Number(servicoValue.value) * 100) / total);
-    const alimentacaoPercentual = ((Number(alimentacaoValue.value) * 100) / total);
+  //   const lazerPercentual = ((Number(lazerValue.value) * 100) / total);
+  //   const educacaoPercentual = ((Number(educacaoValue.value) * 100) / total);
+  //   const investimentoPercentual = ((Number(investimentoValue.value) * 100) / total);
+  //   const servicoPercentual = ((Number(servicoValue.value) * 100) / total);
+  //   const alimentacaoPercentual = ((Number(alimentacaoValue.value) * 100) / total);
 
-    setEduPercentage(educacaoPercentual);
-    setLazerPercentage(lazerPercentual);
-    setInvestPercentage(investimentoPercentual);
-    setAlimentacaoPercentage(alimentacaoPercentual);
-    setServicoPercentage(servicoPercentual);
-    setHasPercentages(true);
-  };
-
-  const formatedData = (data) => {
-    getPercentages(data);
-    const labels = {
-      alimentacao: 'Alimentação',
-      servico: 'Serviço',
-      investimento: 'Investimento',
-      lazer: 'Lazer',
-      educacao: 'Educação',
-    };
-
-    const formated = data.reduce((acc, el, index) => {
-      const { type, value } = el;
-      acc.push({ type: labels[type], value, id: index + 1 });
-      return acc;
-    }, []);
-
-    return setChartData({
-      labels: formated.map((el) => el.type),
-      datasets: [{
-        label: 'All data',
-        data: formated.map((el) => Number(el.value)),
-        backgroundColor: [
-          'rgb(50,205,50)',
-          'rgb(64,224,208)',
-          'rgb(128,0,128)',
-          'rgb(131,111,255)',
-          'rgb(218,165,32)',
-        ],
-        hoverOffset: 4,
-      }],
-    });
-  };
-
-  const getAllData = async () => {
-    const { email } = JSON.parse(localStorage.getItem('user'));
-
-    try {
-      const data = await getData(`/gasto/${email}`);
-      return formatedData(data);
-    } catch (error) {
-      return error.message;
-    }
-  };
+  //   setEduPercentage(educacaoPercentual);
+  //   setLazerPercentage(lazerPercentual);
+  //   setInvestPercentage(investimentoPercentual);
+  //   setAlimentacaoPercentage(alimentacaoPercentual);
+  //   setServicoPercentage(servicoPercentual);
+  //   setHasPercentages(true);
+  // };
 
   const insertGasto = async () => {
     const { email } = JSON.parse(localStorage.getItem('user'));
@@ -116,7 +72,6 @@ function MainUserScreen() {
   };
 
   useEffect(() => {
-    getAllData();
   }, [hasUpdated]);
 
   return (
@@ -127,11 +82,9 @@ function MainUserScreen() {
           <div
             className="pie-chart-from-users"
           >
-            {allChartData
-              ? (<PieChart chartData={allChartData} />)
-              : <img alt="loading" src={loading} />}
+            <PieChart />
           </div>
-          {hasPercentages ? (
+          {/* {hasPercentages ? (
             <PorcentagensComponent
               lazer={lazerPercentage}
               servico={servicoPercentage}
@@ -139,7 +92,7 @@ function MainUserScreen() {
               investimento={investPercentage}
               alimentacao={alimentacaoPercentage}
             />
-          ) : <img alt="loading" src={loading} /> }
+          ) : <img alt="loading" src={loading} /> } */}
         </div>
         <div className="inserir-gastos-main-container">
           <h2>Inserir novo gasto</h2>
