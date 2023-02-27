@@ -4,10 +4,11 @@ import EmailInput from '../components/EmailInput';
 import UserContext from '../contexts/UserContext';
 import GenericInput from '../components/GenericInput';
 import LoginBtn from '../components/LoginBtn';
+import Footer from '../components/Footer';
 
 function Login() {
   const {
-    setEmail, setPassword, hasUser,
+    setEmail, setPassword, hasUser, setHasUser,
   } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -26,6 +27,10 @@ function Login() {
     checkStorage();
   }, []);
 
+  useEffect(() => {
+    setHasUser(false);
+  }, []);
+
   return (
     <>
       <h1>Bem vindo(a) ao gastosApp</h1>
@@ -42,17 +47,18 @@ function Login() {
             />
           </div>
           <LoginBtn />
+          <button
+            className="btn btn-secondary"
+            type="button"
+            onClick={() => navigate('/register')}
+          >
+            Resgistrar
+
+          </button>
         </form>
         { hasUser && <p> usuário inválido ou senha inválido</p> }
-        <button
-          type="button"
-          onClick={() => navigate('/register')}
-        >
-          Resgistrar
-
-        </button>
-
       </div>
+      <Footer />
     </>
   );
 }

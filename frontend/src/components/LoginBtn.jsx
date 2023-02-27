@@ -25,6 +25,7 @@ function LoginBtn() {
   return (
     <div>
       <button
+        className="btn btn-primary"
         type="button"
         onClick={() => login({ email, password })}
       >

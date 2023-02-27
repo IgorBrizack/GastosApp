@@ -11,16 +11,25 @@ function UserListTrComponent({ userData, render, setRender }) {
   const [email, setUserEmail] = useState();
   const [role, setUserRole] = useState();
   const [editar, setEditar] = useState(false);
+  const [usernameUpdate, setUsernameUpdate] = useState();
+  const [userEmailUpdate, setUserEmailUpdate] = useState();
+  const [userRoleUpdate, setUserRoleUpdate] = useState();
 
   const roleHelper = {
     admin: 'ADM',
     user: 'Usuário',
-    ADM: 'admin',
-    Usuário: 'user',
   };
 
   const updateUser = async () => {
-    await putData(`/users/update/${id}`, { username, email, role: roleHelper[role] });
+    const nameToUpdate = usernameUpdate || username;
+    const emailToUpdate = userEmailUpdate || email;
+    const roleToUpdate = userRoleUpdate || role;
+
+    await putData(`/users/update/${id}`, {
+      username: nameToUpdate,
+      email: emailToUpdate,
+      role: roleToUpdate,
+    });
     setRender(!render);
   };
 
@@ -54,7 +63,7 @@ function UserListTrComponent({ userData, render, setRender }) {
                 }}
                 type="text"
                 placeholder="Nome"
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => setUsernameUpdate(e.target.value)}
               />
             </div>
           ) : (
@@ -81,7 +90,7 @@ function UserListTrComponent({ userData, render, setRender }) {
                 }}
                 type="text"
                 placeholder="Email"
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(e) => setUserEmailUpdate(e.target.value)}
               />
             </div>
           ) : (
@@ -103,7 +112,7 @@ function UserListTrComponent({ userData, render, setRender }) {
                 margin: 'auto',
                 width: '100px',
               }}
-              onClick={(e) => setUserRole(e.target.value)}
+              onClick={(e) => setUserRoleUpdate(e.target.value)}
               name="select"
             >
               {userStorage.email !== userData.email && (
