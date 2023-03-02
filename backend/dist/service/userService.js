@@ -46,13 +46,12 @@ class UserService {
             const userData = yield User_1.User.findOne({ where: { email } });
             if (!userData)
                 throw new ErrorWithStatus_1.default('User not found', 400);
-            if (userData && (yield bcrypt.compare(password, userData.password))) {
+            if (yield bcrypt.compare(password, userData.password)) {
                 const { email, role, username } = userData;
                 const token = this.generateToken.generate({ email, role });
                 return { token, email, role, username };
             }
-            if (!userData)
-                throw new ErrorWithStatus_1.default('User not found', 400);
+            throw new ErrorWithStatus_1.default('Wrong password', 400);
         });
         this.registerService = (user) => __awaiter(this, void 0, void 0, function* () {
             const { username, email, passwordCryptography, role } = user;
