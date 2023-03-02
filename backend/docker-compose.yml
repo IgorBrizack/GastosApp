@@ -4,11 +4,16 @@ services:
     image: mysql:5.7
     container_name: gastosAppDb
     volumes:
+    - db-data:/var/lib/mysql/data
     - "/etc/timezone:/etc/timezone:ro"
     - "/etc/localtime:/etc/localtime:ro"
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: password
       MYSQL_HOST: localhost
     ports:
       - 3306:3306
+
+volumes:
+  db-data:
