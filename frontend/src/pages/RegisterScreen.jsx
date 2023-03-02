@@ -26,7 +26,6 @@ function RegisterScreen() {
       setUserCreated(true);
       setInvalidFields(false);
     } catch (error) {
-      alert(error);
       setInvalidFields(true);
     }
   }

@@ -3,13 +3,13 @@ body {
 }
 
 footer {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: auto;
   width: 100%;
   bottom: 0;
   position: fixed;
-  background-color: white;
-  }
+  /* background-color: white; */
+}
 
 .pie-chart-from-users {
   width: 300px;

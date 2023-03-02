@@ -35,7 +35,7 @@ function Login() {
     <>
       <div className="login-main-container">
         <div>
-          <h1 className="banner-text">Bem vindo(a) ao gastosApp</h1>
+          <h1 className="banner-text">Bem vindo(a) ao GastosApp</h1>
         </div>
         <div>
           <form>
