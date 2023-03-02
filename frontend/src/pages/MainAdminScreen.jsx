@@ -29,6 +29,7 @@ function MainAdminScreen() {
   useEffect(() => {
     getAllData();
   }, [hasUpdated]);
+
   return (
     <>
       <Header />

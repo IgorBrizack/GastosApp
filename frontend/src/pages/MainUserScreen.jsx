@@ -8,7 +8,6 @@ import GastosList from '../components/GastosList';
 import UserContext from '../contexts/UserContext';
 import PieChart from '../components/PieChart';
 import PorcentagensComponent from '../components/Porcentagens';
-import Footer from '../components/Footer';
 
 ChartJS.register(...registerables);
 
@@ -113,7 +112,6 @@ function MainUserScreen() {
         </div>
       </div>
       <GastosList />
-      <Footer />
     </>
   );
 }

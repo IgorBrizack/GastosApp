@@ -57,10 +57,20 @@ function Header() {
 
   return (
     <div className="header-main-container">
-      <h1>
-        MeusGastos.com
+      <h1 style={{
+        fontFamily: 'cursive',
+        marginLeft: '10px',
+      }}
+      >
+        GastosApp
       </h1>
-      <p>{userName}</p>
+      <p style={{
+        fontSize: '20px',
+        fontFamily: 'cursive',
+      }}
+      >
+        {`Usuário: ${userName}`}
+      </p>
       {isAdmin() ? (
         <div style={{
           display: 'flex',
@@ -69,6 +79,9 @@ function Header() {
         }}
         >
           <button
+            style={{
+              margin: '5px',
+            }}
             className="btn btn-dark"
             type="button"
             onClick={() => onlyPorcentagens()}
@@ -76,6 +89,9 @@ function Header() {
             Porcentagem Geral
           </button>
           <button
+            style={{
+              margin: '5px',
+            }}
             className="btn btn-dark"
             type="button"
             onClick={() => onlyGastoMensal()}
@@ -83,6 +99,9 @@ function Header() {
             Gasto Mensal
           </button>
           <button
+            style={{
+              margin: '5px',
+            }}
             className="btn btn-dark"
             type="button"
             onClick={() => onlyUsersList()}
@@ -90,6 +109,9 @@ function Header() {
             Usuários
           </button>
           <button
+            style={{
+              margin: '5px',
+            }}
             className="btn btn-dark"
             type="button"
             onClick={() => logout()}
@@ -98,7 +120,10 @@ function Header() {
           </button>
         </div>
       ) : (
-        <div>
+        <div style={{
+          marginRight: '10px',
+        }}
+        >
           <button
             className="btn btn-dark"
             type="button"

@@ -25,6 +25,11 @@ function LoginBtn() {
   return (
     <div>
       <button
+        style={{
+          width: '100%',
+          marginBottom: '5px',
+        }}
+        className="btn btn-primary"
         type="button"
         onClick={() => login({ email, password })}
       >

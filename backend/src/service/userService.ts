@@ -14,13 +14,13 @@ export default class UserService {
 
     if (!userData) throw new ErrorWithStatus('User not found', 400)
 
-    if (userData && await bcrypt.compare(password, userData.password)) {
+    if (await bcrypt.compare(password, userData.password)) {
       const { email, role, username } = userData
       const token = this.generateToken.generate({ email, role })
       return { token, email, role, username }
     }
 
-    if (!userData) throw new ErrorWithStatus('User not found', 400)
+    throw new ErrorWithStatus('Wrong password', 400)
   }
 
   public registerService = async (user: IUser): Promise<void> => {
@@ -56,6 +56,7 @@ export default class UserService {
 
   public update = async (id: number, body: userUpdateInterface): Promise<void> => {
     const { username, role, email } = body
+
     await User.update({ username, role, email }, { where: { id } })
   }
 }

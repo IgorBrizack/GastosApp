@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function EmailInput({ setEmail }) {
   return (
     <label htmlFor="email" className="form-label">
-      Email
+      Email:
       <input
         data-testid="common_login__input-email"
         className="form-control"
