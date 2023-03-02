@@ -35,7 +35,7 @@ function Login() {
     <>
       <div className="login-main-container">
         <div>
-          <h1 id="login-banner-text">Bem vindo(a) ao gastosApp</h1>
+          <h1 className="banner-text">Bem vindo(a) ao gastosApp</h1>
         </div>
         <div>
           <form>
@@ -61,7 +61,14 @@ function Login() {
               </button>
             </div>
           </form>
-          { hasUser && <p> usuário inválido ou senha inválido</p> }
+          { hasUser && (
+          <p style={{
+            color: 'red',
+          }}
+          >
+            Usuário ou Senha Inválido
+          </p>
+          ) }
         </div>
       </div>
       <Footer />
