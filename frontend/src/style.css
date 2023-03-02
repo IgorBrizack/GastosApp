@@ -102,3 +102,28 @@ tr th label p {
   border-radius: 10px;
   width: 550px;
 }
+
+.login-main-container {
+  display: flex;
+  flex-direction: column;
+  margin:  auto;
+  width: 200px;
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 100px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#login-banner-text {
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.buttons-login-container {
+  display: flex;
+  flex-direction: column;
+  /* width: 100px; */
+  justify-content: center;
+}
