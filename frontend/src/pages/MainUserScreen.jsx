@@ -66,7 +66,14 @@ function MainUserScreen() {
           <PorcentagensComponent />
         </div>
         <div className="inserir-gastos-main-container">
-          <h2>Inserir novo gasto</h2>
+          <h2 style={{
+            fontFamily: 'cursive',
+            textAlign: 'center',
+          }}
+          >
+            Inserir novo gasto
+
+          </h2>
           <label htmlFor="dinheiro">
             R$
             <input
@@ -103,6 +110,9 @@ function MainUserScreen() {
             />
           </label>
           <button
+            style={{
+              marginTop: '10px',
+            }}
             className="btn btn-primary"
             type="button"
             onClick={() => insertGasto()}
