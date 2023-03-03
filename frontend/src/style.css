@@ -79,7 +79,7 @@ thead {
   height: 250px;
 }
 tbody {
-    height: 180px;       /* Just for the demo          */
+    height: 280px;       /* Just for the demo          */
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
 }
