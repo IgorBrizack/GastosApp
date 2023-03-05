@@ -21,7 +21,7 @@ Na sua máquina você deve ter:
  - Docker
  - Docker-compose
 
-Caso não possua o docker e opte por rodar direto direto na sua máquina:
+Caso não possua o docker e opte por rodar direto na sua máquina:
 
  - Deve possuir o MySQL instalando na máquina
  - Utilize o npm install no terminal dentro da pasta de cada aplicação (front-end / back-end)
