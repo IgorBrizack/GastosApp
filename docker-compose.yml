@@ -1,0 +1,69 @@
+version: '3.9'
+services:
+  frontend:
+    container_name: app_frontend    
+    build: ./frontend
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    # Os `healthcheck` devem garantir que a aplicação
+    # está operacional, antes de liberar o container
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
+      timeout: 10s
+      retries: 5
+    networks:
+        - gastos
+  backend:
+    container_name: app_backend
+    build: ./backend
+    ports:
+      - 3001:3001
+    platform: linux/x86_64
+    working_dir: /app-backend
+    depends_on:
+      gastos_app_db:
+        condition: service_healthy
+    environment:
+      - APP_PORT=3001
+      - JWT_SECRET=jwt_secret
+      # Os dados abaixo se referem ao container `db`
+      # Dica: Relembre aqui da comunicação interna entre containers
+      - DB_USER=root
+      - DB_PASS=123456
+      - DB_HOST=gastos_app_db
+      - DB_PORT=3306
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
+      timeout: 10s
+      retries: 5
+    networks:
+        - gastos
+  gastos_app_db:
+    image: mysql
+    container_name: db
+    platform: linux/x86_64
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_HOST=localhost
+    restart: 'always'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
+      timeout: 10s
+      retries: 5
+    cap_add:
+      - SYS_NICE # Deve omitir alertas menores
+    networks:
+      - gastos
+
+networks:
+  gastos:
+    driver: bridge
+
