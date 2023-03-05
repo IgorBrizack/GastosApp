@@ -57,3 +57,5 @@ Caso queira criar um novo usuário:
 - [React](https://pt-br.reactjs.org/)
 - [ChartJs](https://www.chartjs.org/)
 - [Bcrypt](https://www.npmjs.com/package/bcrypt)
+
+:beginner: Desenvolvido por [Igor Brizack](https://www.linkedin.com/in/igor-brizack/) 
