@@ -44,7 +44,7 @@ Caso queira criar um novo usuário:
 
 </details>
 
-## 🛠️ Ferramentas & Metodologias Utilizadas
+## 🛠️ Ferramentas Utilizadas
 
 - [Node.js](https://nodejs.org/en/);
 - [Express.js](https://expressjs.com/);
