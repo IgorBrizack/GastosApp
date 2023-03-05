@@ -1,7 +1,7 @@
 # :dollar: GastosApp Projeto FullStack
 
 GastosApp é uma aplicação focada no gerencimaneto de gastos e coletada de dados.
-Aqui você aprender um pouco sobre como controlar suas finanças, e acompanhar o comportamento dos usuários e com o que eles estão gastando.
+Aqui você pode aprender um pouco sobre como controlar suas finanças, acompanhar o comportamento dos usuários e com o que eles estão gastando.
 
 ## 📋 Execute o projeto em sua máquina
 
