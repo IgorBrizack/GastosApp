@@ -38,7 +38,7 @@ Caso não possua o docker e opte por rodar direto na sua máquina:
  
 Caso queira criar um novo usuário:
  
-  - Minimo / Max de caracteres para email: (12 / 20) *deve possui a estrutura @.com*
+  - Minimo / Max de caracteres para email: (12 / 20) *deve possuir a estrutura @.com*
   - Minimo de caracteres para senha: 8
   - Minimo de caracteres para nome: 12
 
