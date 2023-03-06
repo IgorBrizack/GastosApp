@@ -1,28 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { getData } from '../services/request';
 import UserListTrComponent from './UserListTrComponent';
 import '../style.css';
+import UserContext from '../contexts/UserContext';
 
 function UserListTable() {
-  const [render, setRender] = useState(false);
-  const [usersList, setUsersList] = useState([]);
+  const {
+    setUsersListData,
+    hasUpdated,
+    usersListData,
+    usersList,
+  } = useContext(UserContext);
 
   const usersData = async () => {
     const result = await getData('/users');
-    setUsersList(result);
+    setUsersListData(result);
   };
 
   useEffect(() => {
-    setUsersList([]);
+    // setUsersList([]);
     usersData();
-  }, [render]);
+  }, [hasUpdated]);
 
   return (
     <div className="user-table-main-container">
       <table className="table">
         <tbody>
-          {usersList.length > 0 && usersList.map((e) => (
-            <UserListTrComponent key={e.email} userData={e} render={render} setRender={setRender} />
+          {usersList && usersListData.map((e) => (
+            <UserListTrComponent key={e.email} userData={e} />
           ))}
         </tbody>
       </table>

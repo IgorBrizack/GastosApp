@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes, { string } from 'prop-types';
 import '../style.css';
 import { deleteData, putData } from '../services/request';
+import UserContext from '../contexts/UserContext';
 
 const userStorage = JSON.parse(localStorage.getItem('user'));
 
-function UserListTrComponent({ userData, render, setRender }) {
+function UserListTrComponent({ userData }) {
+  const {
+    hasUpdated,
+    setHasUpdated,
+  } = useContext(UserContext);
+
   const [username, setUserName] = useState();
   const [id, setUserId] = useState();
   const [email, setUserEmail] = useState();
@@ -30,12 +36,12 @@ function UserListTrComponent({ userData, render, setRender }) {
       email: emailToUpdate,
       role: roleToUpdate,
     });
-    setRender(!render);
+    setHasUpdated(!hasUpdated);
   };
 
   const deleteUser = async (userEmail) => {
     await deleteData(`/users/${userEmail}`);
-    setRender(!render);
+    setHasUpdated(!hasUpdated);
   };
 
   useEffect(() => {
@@ -147,8 +153,6 @@ function UserListTrComponent({ userData, render, setRender }) {
 
 UserListTrComponent.propTypes = {
   data: PropTypes.arrayOf(string),
-  render: PropTypes.func,
-  setRender: PropTypes.func,
 }.isRequired;
 
 export default UserListTrComponent;
