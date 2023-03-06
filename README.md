@@ -59,6 +59,6 @@ Caso queira criar um novo usuário:
 - [Bcrypt](https://www.npmjs.com/package/bcrypt)
 
 ## Conheça mais sobre a aplicação:
-https://www.youtube.com/watch?v=JWQi3WHSgUg&t=12s
+https://youtu.be/JWQi3WHSgUg
 
 :beginner: Desenvolvido por [Igor Brizack](https://www.linkedin.com/in/igor-brizack/) 
