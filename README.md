@@ -9,7 +9,7 @@ Clone o repositório:
 
 ```
 git clone git@github.com:IgorBrizack/gastosApp.git
-cd gastoaspp
+cd gastosapp
 npm install
 ```
 <details>
