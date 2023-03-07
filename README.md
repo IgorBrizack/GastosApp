@@ -9,7 +9,7 @@ Clone o repositório:
 
 ```
 git clone git@github.com:IgorBrizack/gastosApp.git
-cd trybe-futebol-clube
+cd gastoaspp
 npm install
 ```
 <details>
